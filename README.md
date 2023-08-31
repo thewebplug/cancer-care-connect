@@ -1,6 +1,6 @@
 # React + Vite
 
-### Shout out to [Osho](https://github.com/Thomasosho), [Saleem](https://github.com/thewebplug), [Hammed](https://github.com/hammedTiamiyu)
+### Shout out to 🤷🏾‍♂️[Osho](https://github.com/Thomasosho), 💁🏾‍♂️[Saleem](https://github.com/thewebplug), 👨🏾‍🍼[Hammed](https://github.com/hammedTiamiyu)
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
