@@ -1,9 +1,10 @@
 import React from "react";
 
+
 const Header = () => {
   return (
-    <header>
-      <div>
+    <div className="flex w-full justify-between items-center">
+      <div className="flex items-center">
         <svg
           width="38"
           height="44"
@@ -96,17 +97,17 @@ const Header = () => {
         <div>Cancer Care Connect</div>
       </div>
 
-      <div>
+      <div className="flex items-center">
         <div>Home</div>
-        <div>About Us</div>
+        <div className="ml-[59px] mr-[59px]">About Us</div>
         <div>Contact Us</div>
       </div>
 
-      <div>
-        <button>Sign In</button>
-        <button>Register</button>
+      <div className="flex items-center">
+        <button className="bg-[#fff] w-[128px] h-[49px] rounded-[10px] mr-[28px] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">Sign In</button>
+        <button className="bg-[#5AB9EB] w-[128px] h-[49px] rounded-[10px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">Register</button>
       </div>
-    </header>
+    </div>
   );
 };
 
