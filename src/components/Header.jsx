@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {useLocation} from 'react-router-dom';
 
 
 const Header = () => {
+  const location = useLocation()
+  console.log('shipper', location.pathname)
   return (
     <div className="flex w-full justify-around m-0 p-5">
       <div className="flex w-auto items-center justify-start">
@@ -99,9 +102,21 @@ const Header = () => {
       </div>
 
       <div className="flex w-auto items-center justify-between">
-        <Link to={'/'}>Home</Link>
-        <Link to={'/about'} className="lg:ml-[59px] lg:mr-[59px]">About Us</Link>
-        <Link to={'/contact'}>Contact Us</Link>
+        {location.pathname === "/" ? 
+          <Link to={'/'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] hover:bg-[#FFC0C0] text-white shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">Home</Link>
+          :
+          <Link to={'/'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px]">Home</Link>
+        }
+        {location.pathname === "/about" ? 
+          <Link to={'/about'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] lg:ml-[59px] lg:mr-[59px] text-white hover:bg-[#FFC0C0] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">About Us</Link>
+          :
+          <Link to={'/about'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px] lg:ml-[59px] lg:mr-[59px]">About Us</Link>
+        }
+        {location.pathname === "/contact" ? 
+          <Link to={'/contact'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] hover:bg-[#FFC0C0] text-white shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">Contact Us</Link>
+          :
+          <Link to={'/contact'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px]">Contact Us</Link>
+        }
       </div>
 
       <div className="flex w-auto items-center justify-end">
