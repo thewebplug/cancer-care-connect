@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Vector from "../img/Vector.png";
 import Avatars from "../img/Group 9951.png";
 import Img1 from "../img/img1.png";
+import Img2 from "../img/Cancer_Care_Connect 2.png";
 import Right from "../img/right.png";
 import Left from "../img/left.png";
 import ContactForm from "../components/ContactForm";
@@ -66,7 +67,7 @@ const Home = () => {
             </button>
           </div>
 
-          <img className="w-[731px]" src={Img1} alt="" />
+          <img className="w-[731px]" src={Img2} alt="" />
         </div>
 
         <ContactForm />
