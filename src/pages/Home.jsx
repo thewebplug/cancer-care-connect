@@ -49,7 +49,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-[94px] justify-start mb-[300px] mx-16">
+        <div className="grid grid-cols-2 gap-[94px] justify-start mb-[100px] mx-16">
           <div className="">
             <div className="text-[20px] text-justify">
               Cancer diagnosis not only takes a physical toll but also impacts
