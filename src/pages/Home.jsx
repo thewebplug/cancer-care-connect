@@ -21,7 +21,7 @@ const Home = () => {
             <div className="text-[58px] mb-[33px] font-[700]">
               Your Personalized Cancer Support Web Application
             </div>
-            <div className="text-[20px]">
+            <div className="text-[20px] text-justify">
               Cancer Care Connect is a cutting-edge web application designed
               exclusively for cancer patients, survivors, caregivers, and their
               families.
@@ -34,7 +34,7 @@ const Home = () => {
           <img className="w-[731px]" src={Img1} alt="" />
           <div className="">
             <div className="text-[48px] font-[400]">What we offer</div>
-            <div className="text-[20px]">
+            <div className="text-[20px] text-justify">
               Are you or a loved one battling cancer and seeking a reliable
               companion throughout your journey? Look no further – Cancer Care
               Connect is here to empower, inform, and uplift you every step of
@@ -50,7 +50,7 @@ const Home = () => {
 
         <div className="grid grid-cols-2 gap-[94px] justify-start mb-[300px] mx-16">
           <div className="">
-            <div className="text-[20px]">
+            <div className="text-[20px] text-justify">
               Cancer diagnosis not only takes a physical toll but also impacts
               emotional and psychological well-being. Patients often feel
               isolated, struggling to find people who truly understand their

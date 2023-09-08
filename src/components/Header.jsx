@@ -7,7 +7,7 @@ const Header = () => {
   const location = useLocation()
   console.log('shipper', location.pathname)
   return (
-    <div className="flex w-full justify-around m-0 p-5">
+    <div className="flex w-full justify-around m-0 py-5 px-0">
       <div className="flex w-auto items-center justify-start">
         <svg
           width="38"
