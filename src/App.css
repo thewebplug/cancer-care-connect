@@ -1,10 +1,3 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -39,4 +32,19 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.bgOne {
+  background-image: url('./assets/bodyTwo.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 20%;
+  background-position-y: 1100px;
+}
+
+.bgTwo {
+  background-image: url('./assets/bodyOne.png');
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
 }

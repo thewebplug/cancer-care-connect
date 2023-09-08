@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 const Header = () => {
   return (
-    <div className="flex w-full justify-between items-center">
-      <div className="flex items-center">
+    <div className="flex w-full justify-around m-0 p-5">
+      <div className="flex w-auto items-center justify-start">
         <svg
           width="38"
           height="44"
@@ -97,13 +98,13 @@ const Header = () => {
         <div>Cancer Care Connect</div>
       </div>
 
-      <div className="flex items-center">
-        <div>Home</div>
-        <div className="ml-[59px] mr-[59px]">About Us</div>
-        <div>Contact Us</div>
+      <div className="flex w-auto items-center justify-between">
+        <Link to={'/'}>Home</Link>
+        <Link to={'/about'} className="lg:ml-[59px] lg:mr-[59px]">About Us</Link>
+        <Link to={'/contact'}>Contact Us</Link>
       </div>
 
-      <div className="flex items-center">
+      <div className="flex w-auto items-center justify-end">
         <button className="bg-[#fff] w-[128px] h-[49px] rounded-[10px] mr-[28px] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">Sign In</button>
         <button className="bg-[#5AB9EB] w-[128px] h-[49px] rounded-[10px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">Register</button>
       </div>

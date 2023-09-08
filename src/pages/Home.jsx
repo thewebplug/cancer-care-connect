@@ -12,11 +12,11 @@ const Home = () => {
   return (
     <div className="w-full text-left p-0">
       <Header />
-      <div className="">
+      <div className="bgOne">
         <img className="absolute top-0 right-0 z-[-1]" src={Vector} alt="" />
         {/* <img className="absolute top-0 right-0 z-[-1]" src={Left} alt="" /> */}
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mx-16">
           <div>
             <div className="text-[58px] mb-[33px] font-[700]">
               Your Personalized Cancer Support Web Application
@@ -30,7 +30,7 @@ const Home = () => {
           <img className="w-[728px] mt-[90px]" src={Avatars} alt="" />
         </div>
 
-        <div className="grid grid-cols-2 gap-[94px] justify-start mt-[155px] mb-[168px]">
+        <div className="grid grid-cols-2 gap-[94px] justify-start mt-[155px] mb-[168px] mx-16">
           <img className="w-[731px]" src={Img1} alt="" />
           <div className="">
             <div className="text-[48px] font-[400]">What we offer</div>
@@ -47,7 +47,8 @@ const Home = () => {
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-[94px] justify-start mb-[300px]">
+
+        <div className="grid grid-cols-2 gap-[94px] justify-start mb-[300px] mx-16">
           <div className="">
             <div className="text-[20px]">
               Cancer diagnosis not only takes a physical toll but also impacts

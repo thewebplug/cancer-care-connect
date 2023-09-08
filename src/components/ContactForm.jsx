@@ -1,6 +1,6 @@
 const ContactForm = () => {
     return (
-        <div className="">
+        <div className="bgTwo">
             <div className="text-[30px] font-[700] text-center mb-[40px]">Send us a message</div>
             <div className=" w-[800px] grid grid-cols-2 gap-[47px] m-auto">
 
