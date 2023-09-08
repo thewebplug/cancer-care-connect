@@ -98,30 +98,30 @@ const Header = () => {
             </linearGradient>
           </defs>
         </svg>
-        <div>Cancer Care Connect</div>
+        <div className="font-bold">Cancer Care Connect</div>
       </div>
 
       <div className="flex w-auto items-center justify-between">
         {location.pathname === "/" ? 
-          <Link to={'/'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] hover:bg-[#FFC0C0] text-white shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">Home</Link>
+          <Link to={'/'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] hover:bg-[#FFC0C0] text-white shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Home</Link>
           :
-          <Link to={'/'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px]">Home</Link>
+          <Link to={'/'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px] font-bold">Home</Link>
         }
         {location.pathname === "/about" ? 
-          <Link to={'/about'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] lg:ml-[59px] lg:mr-[59px] text-white hover:bg-[#FFC0C0] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">About Us</Link>
+          <Link to={'/about'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] lg:ml-[59px] lg:mr-[59px] text-white hover:bg-[#FFC0C0] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">About Us</Link>
           :
-          <Link to={'/about'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px] lg:ml-[59px] lg:mr-[59px]">About Us</Link>
+          <Link to={'/about'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px] lg:ml-[59px] lg:mr-[59px] font-bold">About Us</Link>
         }
         {location.pathname === "/contact" ? 
-          <Link to={'/contact'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] hover:bg-[#FFC0C0] text-white shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">Contact Us</Link>
+          <Link to={'/contact'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] hover:bg-[#FFC0C0] text-white shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Contact Us</Link>
           :
-          <Link to={'/contact'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px]">Contact Us</Link>
+          <Link to={'/contact'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px] font-bold">Contact Us</Link>
         }
       </div>
 
       <div className="flex w-auto items-center justify-end">
-        <button className="bg-[#fff] w-[128px] h-[49px] rounded-[10px] mr-[28px] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">Sign In</button>
-        <button className="bg-[#5AB9EB] w-[128px] h-[49px] rounded-[10px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">Register</button>
+        <button className="bg-[#fff] hover:bg-[#fefefe] text-black w-[auto] h-[49px] px-5 rounded-[10px] mr-[28px] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Sign In</button>
+        <button className="bg-[#5AB9EB] hover:bg-[#45a2d4] text-white w-[auto] h-[49px] px-5 rounded-[10px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Register</button>
       </div>
     </div>
   );
