@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -95,25 +96,61 @@ const Footer = () => {
               </linearGradient>
             </defs>
           </svg>
-          <div>Cancer Care Connect</div>
+          <div>
+            <h2 className=" font-medium text-xl">
+              Cancer Care Connect
+            </h2>
+            <p className=" text-xs">
+              Built With love of the community at heart.
+            </p>
+          </div>
         </div>
 
         <div className="">
           <div className="text-[20px] font-[700] mb-[15px]">Quick Links</div>
-          <div className="mb-[5px]">Home</div>
-          <div className="mb-[5px]">About Us</div>
-          <div className="mb-[5px]">Contact Us</div>
+          <div className="mb-[5px]">
+          <Link to={"/"}>
+            Home
+          </Link>
+          </div>
+          <div className="mb-[5px]">
+            <Link to={'/about'}>
+              About Us
+            </Link>
+          </div>
+          <div className="mb-[5px]">
+            <Link to={'/contact'}>
+              Contact Us
+            </Link>
+          </div>
         </div>
 
         <div className="">
-          <div className="text-[20px] font-[700] mb-[15px]">Quick Links</div>
-          <div className="mb-[5px]">Home</div>
-          <div className="mb-[5px]">About Us</div>
-          <div className="mb-[5px]">Contact Us</div>
+          {/* <div className="text-[20px] font-[700] mb-[15px]">Quick Links</div> */}
+          <div className="mb-[5px]">
+            <Link>
+              Forum
+            </Link>
+          </div>
+          <div className="mb-[5px]">
+            <Link>
+              Privacy Policy
+            </Link>
+          </div>
+          <div className="mb-[5px]">
+            <Link>
+              Learning Center
+            </Link>
+          </div>
+          <div className="mb-[5px]">
+            <Link>
+              Get Professional Help
+            </Link>
+          </div>
         </div>
 
         <div className="">
-          <div className="text-[20px] font-[700] mb-[15px]">Contact</div>
+          {/* <div className="text-[20px] font-[700] mb-[15px]">Contact</div> */}
           <div className="mb-[5px] flex items-center">
             <svg
               className="mr-[10px]"
@@ -136,7 +173,11 @@ const Footer = () => {
               </defs>
             </svg>
 
-            <div>000-000-000</div>
+            <div>
+              <Link to={'tel:+2347057940517'}>
+                070-579-405-17
+              </Link>
+            </div>
           </div>
           <div className="mb-[5px] flex items-center">
             <svg
@@ -153,7 +194,11 @@ const Footer = () => {
               />
             </svg>
 
-            <div>info@email.com</div>
+            <div>
+              <Link to={'mailto:info@cancercareconnect.com'}>
+                info@cancercareconnect.com
+              </Link>
+            </div>
           </div>
           <div className="mb-[5px] flex items-center">
             <svg
