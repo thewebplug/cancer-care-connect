@@ -2,6 +2,7 @@ import express from "express";
 // const express = require("express");
 // import sql from "./db.js";
 import cors from "cors"
+// import data from "../server/data";
 
 const app = express();
 
@@ -23,6 +24,11 @@ app.get("/api/v1/about", (req, res) => {
 
 app.get("/api/v1/mission", (req, res) => {
     res.send('Our mission is to build a platform to support people living with cancer ailment and to educate healthy individual on preventive measures')
+})
+
+app.get("/api/v1/resources", (req, res) => {
+    res.send('Our mission is to build a platform to support people living with cancer ailment and to educate healthy individual on preventive measures')
+    // res.send(`${data.resources}`)
 })
 
   const PORT = 32000
