@@ -120,8 +120,8 @@ const Header = () => {
       </div>
 
       <div className="flex w-auto items-center justify-end">
-        <button className="bg-[#fff] hover:bg-[#fefefe] text-black w-[auto] h-[49px] px-5 rounded-[10px] mr-[28px] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Sign In</button>
-        <button className="bg-[#5AB9EB] hover:bg-[#45a2d4] text-white w-[auto] h-[49px] px-5 rounded-[10px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Register</button>
+      <button className="bg-[#fff] hover:bg-[#fefefe] text-black w-[auto] h-[49px] px-5 rounded-[10px] mr-[28px] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Sign In</button>
+      <Link to='/signup'><button className="bg-[#5AB9EB] hover:bg-[#45a2d4] text-white w-[auto] h-[49px] px-5 rounded-[10px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Register</button></Link>
       </div>
     </div>
   );
