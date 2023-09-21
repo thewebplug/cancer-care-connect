@@ -2,6 +2,7 @@ import express from "express";
 import sql from "./db.js";
 import cors from "cors";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const app = express();
 const PORT = 3100;
@@ -26,16 +27,18 @@ app.post("/api/v1/register", async (req, res) => {
   const { firstName, lastName, phone, email, dateofbirth, gender, password } =
     req.body;
 
-    console.log('res', res.statusCode);
+  console.log("res", res.statusCode);
 
   try {
-    const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/;
+    const passwordRegex =
+      /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/;
     if (!passwordRegex.test(password)) {
       res.status(400).send("Password does not meet requirements.");
       return;
     }
 
-    const emailCheck = await sql`SELECT COUNT(*) FROM users WHERE email = ${email}`;
+    const emailCheck =
+      await sql`SELECT COUNT(*) FROM users WHERE email = ${email}`;
     const emailCount = emailCheck[0].count;
 
     if (emailCount > 0) {
@@ -43,7 +46,8 @@ app.post("/api/v1/register", async (req, res) => {
       return;
     }
 
-    const phoneCheck = await sql`SELECT COUNT(*) FROM users WHERE phone = ${phone}`;
+    const phoneCheck =
+      await sql`SELECT COUNT(*) FROM users WHERE phone = ${phone}`;
     const phoneCount = phoneCheck[0].count;
 
     if (phoneCount > 0) {
@@ -69,6 +73,47 @@ app.post("/api/v1/register", async (req, res) => {
   }
 });
 
+app.post("/api/v1/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  console.log("res", res.statusCode);
+  console.log("email", email);
+
+  try {
+    const emailCheck = await sql`SELECT * FROM users WHERE email = ${email};`;
+
+    if (emailCheck[0]) {
+      bcrypt.compare(password, emailCheck[0].password, function (err, result) {
+        if (result) {
+          var token = jwt.sign(
+            {
+              firstname: emailCheck[0].firstname,
+              lastname: emailCheck[0].lastname,
+              profilepicture: emailCheck[0].profilepicture,
+              phone: emailCheck[0].phone,
+              email: emailCheck[0].email,
+              myforum: emailCheck[0].myforum,
+              forum: emailCheck[0].forum,
+              newsletter: emailCheck[0].newsletter,
+            },
+            "shhhhh"
+          );
+          res.status(201).send({
+            message: "Login Successful",
+            token,
+          });
+        } else {
+          res.status(500).send("Incorrect Login details");
+        }
+      });
+    } else {
+      res.status(500).send("Incorrect Login details");
+    }
+  } catch (error) {
+    // console.error("Error inserting user:", error);
+    res.status(500).send("Internal server Error");
+  }
+});
 
 app.get("/api/v1/about", (req, res) => {
   res.send(
