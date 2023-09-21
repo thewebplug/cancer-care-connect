@@ -115,6 +115,26 @@ app.post("/api/v1/login", async (req, res) => {
   }
 });
 
+app.post("/api/v1/contact", async (req, res) => {
+  const { firstname, lastname, phone, email, message } = req.body;
+
+  try {
+    const response = await sql`
+      INSERT INTO contacts (firstname, lastname, phone, email, message)
+      VALUES (${firstname}, ${lastname}, ${phone}, ${email}, ${message})
+      RETURNING *`;
+    console.log("response", response);
+    if (response) {
+      res.status(201).send(response);
+    } else {
+      res.status(500).send("Internal server Error343");
+    }
+  } catch (error) {
+    // console.error("Error inserting user:", error);
+    res.status(500).send("Internal server Error");
+  }
+});
+
 app.get("/api/v1/about", (req, res) => {
   res.send(
     "Welcome to cancer care connect (C C C). Never feel lonely, ccc is here to support you"
