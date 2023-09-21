@@ -21,7 +21,7 @@ app.get("/api/v1/users", async (req, res) => {
   }
 });
 
-app.post("/api/register", async (req, res) => {
+app.post("/api/v1/register", async (req, res) => {
   const { register } = req.body;
   const response =
     await sql`INSERT INTO users (register) VALUES (${register}) RETURNING *`;
