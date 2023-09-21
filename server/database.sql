@@ -3,7 +3,7 @@ CREATE TABLE users (
   firstName VARCHAR(255),
   lastName VARCHAR(255),
   profilePicture VARCHAR(255) NULL,
-  phone INT,
+  phone VARCHAR(11),
   email VARCHAR(255),
   dateOfBirth DATE,
   gender VARCHAR(10),
