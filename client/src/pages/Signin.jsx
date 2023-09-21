@@ -9,8 +9,42 @@ import Avatars from "../img/Web Developer doing coding - 640x533 1.png";
 // import Right from "../img/right.png";
 // import Left from "../img/left.png";
 import ContactForm from "../components/ContactForm";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3100/api/v1/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json(); 
+        localStorage.setItem('token', data.token)
+        toast.success('Login Successful')
+      } else {
+        throw new Error("Network response was not ok");
+      }
+
+      console.log('Response:', response); 
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  }
+
   return (
     <div className="w-screen text-left p-0">
       <Header />
@@ -45,23 +79,34 @@ const Signin = () => {
           </div>
 
           <div className="grid grid-cols-2">
-            <div className="w-auto row justify-center">
+            <form className="w-auto row justify-center" onSubmit={handleSubmit}>
               <input
                 className="bg-[#fff] border grid border-[#9e9e9e] w-[500px] h-[45px] p-5 rounded-lg mb-5"
                 type="email"
                 placeholder="Email"
+                required
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
               />
 
               <input
                 className="bg-[#fff] border grid border-[#9e9e9e] w-[500px] h-[45px] p-5 rounded-lg mb-5"
                 type="password"
                 placeholder="Password"
+                required
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+
               />
 
-              <button className="bg-[#5AB9EB] w-24 h-[45px] m-auto mt-8 rounded-lg text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">
+              <button type="submit" className="bg-[#5AB9EB] w-24 h-[45px] m-auto mt-8 rounded-lg text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">
                 Sign In
               </button>
-            </div>
+            </form>
             
             <div className="w-screen mt-[-210px]">
               <img src={Employee} className="justify-start w-6/12" alt="Employee" />
