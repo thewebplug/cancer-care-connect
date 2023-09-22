@@ -6,10 +6,13 @@ import Contact from "./pages/Contact";
 import Error from "./pages/Error";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
+import { ToastContainer } from 'react-toastify';
+
 
 function App() {
   return (
     <>
+    <ToastContainer />
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
