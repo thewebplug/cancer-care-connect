@@ -196,7 +196,7 @@ app.put("/api/v1/:user/upadateJournal/:id", async (req, res) => {
   try {
     const { user, id } = req.params
     const {journal} = req.body
-    const updatedJournal = await sql`UPDATE journals * SET journal = ${journal} WHERE id = ${id} RETURNING *`;
+    const updatedJournal = await sql`UPDATE journals SET journal = ${journal} WHERE id = ${id} RETURNING *`;
     if (updatedJournal && updatedJournal.length > 0) {
       res.status(200).send(updatedJournal);
     } else {
