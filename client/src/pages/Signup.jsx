@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import Vector from "../img/Vector.png";
 import Avatars from "../img/Web Developer doing coding - 640x533 1.png";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -40,7 +41,7 @@ const Signup = () => {
           throw new Error("Network response was not ok");
         } else {
           const data = await response.json();
-          console.info('Success:', data);
+          // console.info('Success:', data);
           setDate("");
           setEmail("");
           setFirstName("");
@@ -49,6 +50,7 @@ const Signup = () => {
           setPassword("");
           setPhone("");
           setPasswordConfirmation("");
+          toast.success("Welcome to Cancer Care Connect!")
         }
       } catch (error) {
         console.error("Error:", error.message);

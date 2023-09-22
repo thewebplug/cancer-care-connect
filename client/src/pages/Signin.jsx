@@ -9,8 +9,38 @@ import Avatars from "../img/Web Developer doing coding - 640x533 1.png";
 // import Right from "../img/right.png";
 // import Left from "../img/left.png";
 import ContactForm from "../components/ContactForm";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { userLogin } from "../../store/actions/authAction";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const { auth } = useSelector((state) => ({ ...state }));
+
+  const { authenticate } = auth;
+
+  const handleSubmit = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    dispatch(userLogin(email, password));
+  };
+
+  useEffect(() => {
+    if (authenticate) {
+      setLoading(false);
+      navigate("/");
+      toast.success("Login Sucess");
+    }
+  }, [authenticate]);
+
   return (
     <div className="w-screen text-left p-0">
       <Header />
@@ -31,40 +61,54 @@ const Signin = () => {
             </div>
           </div>
           <img className="w-[728px] mt-[90px]" src={Avatars} alt="" />
-        
         </div>
 
         <div className="justify-between mx-16">
           <div className="w-auto grid grid-cols-1 mb-20">
-            <div className="w-auto text-[72px] font-[700] mb-3">
-              Sign In
-            </div>
+            <div className="w-auto text-[72px] font-[700] mb-3">Sign In</div>
             <div className="w-auto text-[36px] font-[700]">
               Please Login To Continue
             </div>
           </div>
 
           <div className="grid grid-cols-2">
-            <div className="w-auto row justify-center">
+            <form className="w-auto row justify-center" onSubmit={handleSubmit}>
               <input
                 className="bg-[#fff] border grid border-[#9e9e9e] w-[500px] h-[45px] p-5 rounded-lg mb-5"
                 type="email"
                 placeholder="Email"
+                required
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
               />
 
               <input
                 className="bg-[#fff] border grid border-[#9e9e9e] w-[500px] h-[45px] p-5 rounded-lg mb-5"
                 type="password"
                 placeholder="Password"
+                required
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
               />
 
-              <button className="bg-[#5AB9EB] w-24 h-[45px] m-auto mt-8 rounded-lg text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">
-                Sign In
+              <button
+                type="submit"
+                className="bg-[#5AB9EB] w-24 h-[45px] m-auto mt-8 rounded-lg text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]"
+              >
+                {loading ? "Loading..." : "Sign In"}
               </button>
-            </div>
-            
+            </form>
+
             <div className="w-screen mt-[-210px]">
-              <img src={Employee} className="justify-start w-6/12" alt="Employee" />
+              <img
+                src={Employee}
+                className="justify-start w-6/12"
+                alt="Employee"
+              />
             </div>
           </div>
         </div>
