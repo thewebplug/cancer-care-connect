@@ -1,9 +1,27 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {useLocation} from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+
+  const { auth } = useSelector((state) => ({ ...state }));
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch({
+      type: "LOGOUT_SUCCESS",
+    });
+    localStorage.removeItem("token");
+    navigate("/signin");
+  };
+
+  console.log('auth', auth);
   const location = useLocation()
   console.log('shipper', location.pathname)
   return (
@@ -119,10 +137,11 @@ const Header = () => {
         }
       </div>
 
-      <div className="flex w-auto items-center justify-end">
+      {auth?.token ? <div className="font-bold text-[18px]">Welcome {auth?.userInfo?.firstname} {auth?.userInfo?.lastname}</div> :<div className="flex w-auto items-center justify-end">
       <Link to={'/signin'}><button className="bg-[#fff] hover:bg-[#e7e1e1] text-black w-[auto] h-[49px] px-5 rounded-[10px] mr-[28px] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Sign In</button></Link>
       <Link to='/signup'><button className="bg-[#5AB9EB] hover:bg-[#45a2d4] text-white w-[auto] h-[49px] px-5 rounded-[10px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Register</button></Link>
-      </div>
+      </div>}
+      {auth?.token && <div onClick={handleLogout}>Log Out</div>}
     </div>
   );
 };

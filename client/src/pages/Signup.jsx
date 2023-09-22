@@ -2,14 +2,63 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Vector from "../img/Vector.png";
 import Avatars from "../img/Web Developer doing coding - 640x533 1.png";
-import Img1 from "../img/img1.png";
-import Img2 from "../img/Cancer_Care_Connect 2.png";
-import Conncetion from "../img/undraw_connected_re_lmq2 1.png";
-// import Right from "../img/right.png";
-// import Left from "../img/left.png";
-import ContactForm from "../components/ContactForm";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Signup = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [date, setDate] = useState("");
+  const [gender, setGender] = useState("");
+  const [password, setPassword] = useState("");
+  const [password_confirmation, setPasswordConfirmation] = useState("");
+
+  const submitRegister = async (event) => {
+    event.preventDefault();
+    if (password === password_confirmation) {
+      try {
+        const response = await fetch("http://localhost:3100/api/v1/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            phone,
+            email,
+            dateofbirth: date,
+            gender,
+            password,
+          }),
+        });
+
+        // console.error('Response:', await response.json()); 
+  
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        } else {
+          const data = await response.json();
+          // console.info('Success:', data);
+          setDate("");
+          setEmail("");
+          setFirstName("");
+          setLastName("");
+          setGender("");
+          setPassword("");
+          setPhone("");
+          setPasswordConfirmation("");
+          toast.success("Welcome to Cancer Care Connect!")
+        }
+      } catch (error) {
+        console.error("Error:", error.message);
+      }
+    } else {
+      console.error('password does not match');
+    }
+  };
   return (
     <div className="w-full text-left p-0">
       <Header />
@@ -38,61 +87,95 @@ const Signup = () => {
           <div className="w-[80%] m-auto text-[36px] font-[700] mb-5 ">
             Please Sign Up To Continue
           </div>
-          <div className=" w-[80%] grid grid-cols-2 gap-10 m-auto">
-            <input
-              className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
-              type="text"
-              placeholder="First Name"
-            />
-            <input
-              className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
-              type="text"
-              placeholder="Last Name"
-            />
-            <input
-              className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
-              type="text"
-              placeholder="Mobile Number"
-            />
-            <input
-              className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
-              type="text"
-              placeholder="Email"
-            />
-            <input
-              className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
-              type="date"
-              placeholder="Email"
-            />
-            <select
-              className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
-              type="text"
-              placeholder="Email"
-            >
-              <option value="">Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-            <input
-              className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
-              type="password"
-              placeholder="Password"
-            />
-            <input
-              className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
-              type="password"
-              placeholder="Confirm Password"
-            />
-          </div>
-          {/* <div className="w-full flex justify-center mt-[47px] h-[167px]">
-                <textarea className="bg-[#fff] w-[80%] border border-[#9e9e9e] p-[5px] rounded-[8px]" placeholder="Message" name="" id=""></textarea>
-                </div> */}
-
-          <div className="w-full flex justify-center">
-            <button className="bg-[#5AB9EB] w-[400px] h-[45px] m-auto mt-[38px] rounded-[15px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">
-              Register
-            </button>
-          </div>
+          <form onSubmit={submitRegister}>
+            <div className=" w-[80%] grid grid-cols-2 gap-10 m-auto">
+              <input
+                className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
+                type="text"
+                value={firstName}
+                onChange={(event) => {
+                  setFirstName(event.target.value);
+                }}
+                placeholder="First Name"
+              />
+              <input
+                className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
+                type="text"
+                value={lastName}
+                onChange={(event) => {
+                  setLastName(event.target.value);
+                }}
+                placeholder="Last Name"
+              />
+              <input
+                className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
+                type="tel"
+                minLength={11}
+                maxLength={11}
+                value={phone}
+                onChange={(event) => {
+                  setPhone(event.target.value);
+                }}
+                placeholder="Mobile Number"
+              />
+              <input
+                className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
+                type="text"
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
+                placeholder="Email"
+              />
+              <input
+                className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
+                type="date"
+                value={date}
+                min="1920-01-01" 
+                max="2022-12-31"
+                onChange={(event) => {
+                  setDate(event.target.value);
+                }}
+                placeholder="Date"
+              />
+              <select
+                className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
+                type="text"
+                placeholder="Gender"
+                value={gender}
+                onChange={(event) => {
+                  setGender(event.target.value);
+                }}
+              >
+                <option value="">Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <input
+                className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
+                type="password"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+                placeholder="Password"
+              />
+              <input
+                className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
+                type="password"
+                placeholder="Confirm Password"
+                value={password_confirmation}
+                onChange={(event) => {
+                  setPasswordConfirmation(event.target.value);
+                }}
+              />
+            </div>
+            <div className="w-full flex justify-center">
+              <button type="submit" className="bg-[#5AB9EB] w-[400px] h-[45px] m-auto mt-[38px] rounded-[15px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">
+                Register
+              </button>
+            </div>
+          </form>
         </div>
       </div>
       <Footer />
