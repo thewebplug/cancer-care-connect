@@ -154,6 +154,57 @@ app.get("/api/v1/resources", (req, res) => {
   );
 });
 
+app.post("/api/v1/:user/createJournal", async (req, res) => {
+  const { title, user, journal } = req.body;
+
+  console.log("res", res.statusCode);
+
+  try {
+    const response = await sql`
+      INSERT INTO journals (title, user, journal)
+      VALUES (${title}, ${user}, ${journal})
+      RETURNING *`;
+
+    if (response) {
+      res.status(201).send(response);
+    } else {
+      res.status(500).send("Internal server Error")
+    }
+  } catch (error) {
+    // console.error("Error inserting user:", error);
+    res.status(500).send("Internal server Error");
+  }
+});
+
+app.get("/api/v1/:user/getJournals", async (req, res) => {
+  
+  try {
+    const { user } = req.params
+    const journal = await sql`SELECT * FROM journals WHERE user = ${user}`;
+    if (journal) {
+      res.status(200).send(journal);
+    } else {
+      res.status(40).send("No rsources found");
+    }
+  } catch (error) {
+    res.status(500).send("Internal server Error");
+  }
+});
+
+app.put("/api/v1/:user/upadateJournal/:id", async (req, res) => {
+  
+  try {
+    const { user, id } = req.params
+    const journal = await sql`SELECT * FROM journals WHERE user = ${user} AND id = ${id} RETURNING *`;
+    if (journal) {
+      res.status(200).send(journal);
+    } else {
+      res.status(40).send("No rsources found");
+    }
+  } catch (error) {
+    res.status(500).send("Internal server Error");
+  }
+});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
