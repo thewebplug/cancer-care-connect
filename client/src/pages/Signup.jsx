@@ -4,6 +4,7 @@ import Vector from "../img/Vector.png";
 import Avatars from "../img/Web Developer doing coding - 640x533 1.png";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { Urls } from "../routes/urls";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -15,11 +16,12 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
 
+
   const submitRegister = async (event) => {
     event.preventDefault();
     if (password === password_confirmation) {
       try {
-        const response = await fetch("http://localhost:3100/api/v1/register", {
+        const response = await fetch(`${Urls?.baseUrl}${Urls?.register}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -66,9 +68,9 @@ const Signup = () => {
         <img className="absolute top-0 right-0 z-[-1]" src={Vector} alt="" />
         {/* <img className="absolute top-0 right-0 z-[-1]" src={Left} alt="" /> */}
 
-        <div className="flex justify-between items-center mx-16">
+        <div className="flex lg:flex-row flex-col justify-between items-center lg:mx-16 md:mx-16 mx-6">
           <div>
-            <div className="text-[58px] mb-[33px] font-[700]">
+            <div className="lg:text-[48px] md:text-[48px] text-[35px] mb-[33px] font-[700]">
               Join us today <br /> and get the <br /> attention you need
             </div>
             <div className="text-[20px] text-justify">
@@ -81,14 +83,15 @@ const Signup = () => {
           <img className="w-[728px] mt-[90px]" src={Avatars} alt="" />
         </div>
         <div className="bgTwo">
-          <div className="w-[80%] m-auto text-[72px] font-[700] mb-5">
+          <div className="w-[80%] m-auto lg:text-[72px] md:text-[72px] text-[45px] font-[700] mb-5">
             Sign Up
           </div>
-          <div className="w-[80%] m-auto text-[36px] font-[700] mb-5 ">
+          <div className="w-[80%] m-auto lg:text-[36px] md:text-[36px] text-[26px] font-[700] mb-5 ">
             Please Sign Up To Continue
           </div>
-          <form onSubmit={submitRegister}>
-            <div className=" w-[80%] grid grid-cols-2 gap-10 m-auto">
+          
+          <form className="lg:mx-0 mx-8" onSubmit={submitRegister}>
+            <div className=" lg:w-[80%] w-full grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-10 lg:m-auto">
               <input
                 className="bg-[#fff] border border-[#9e9e9e] p-[5px] rounded-[8px]"
                 type="text"
@@ -171,7 +174,7 @@ const Signup = () => {
               />
             </div>
             <div className="w-full flex justify-center">
-              <button type="submit" className="bg-[#5AB9EB] w-[400px] h-[45px] m-auto mt-[38px] rounded-[15px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">
+              <button type="submit" className="mb-10 bg-[#5AB9EB] w-[400px] h-[45px] m-auto mt-[38px] rounded-[15px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]">
                 Register
               </button>
             </div>
