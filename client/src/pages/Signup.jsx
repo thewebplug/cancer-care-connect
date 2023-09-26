@@ -63,7 +63,7 @@ const Signup = () => {
   };
   return (
     <div className="w-full text-left p-0">
-      {/* <Header /> */}
+      <Header />
       <div className="bgOne">
         <img className="absolute top-0 right-0 z-[-1]" src={Vector} alt="" />
         {/* <img className="absolute top-0 right-0 z-[-1]" src={Left} alt="" /> */}
