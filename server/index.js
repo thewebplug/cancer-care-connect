@@ -195,14 +195,34 @@ app.put("/api/v1/:user/upadateJournal/:id", async (req, res) => {
   
   try {
     const { user, id } = req.params
-    const journal = await sql`SELECT * FROM journals WHERE user = ${user} AND id = ${id} RETURNING *`;
-    if (journal) {
-      res.status(200).send(journal);
+    const {journal} = req.body
+    const updatedJournal = await sql`UPDATE journals SET journal = ${journal} WHERE id = ${id} RETURNING *`;
+    if (updatedJournal && updatedJournal.length > 0) {
+      res.status(200).send(updatedJournal);
     } else {
       res.status(40).send("No rsources found");
     }
   } catch (error) {
     res.status(500).send("Internal server Error");
+  }
+});
+
+app.delete("/api/v1/:user/deleteJournal/:id", async (req, res) => {
+  
+
+  try {
+    const { user, id } = req.params;
+    const deletedJournal =
+      await sql`DELETE FROM journals WHERE id = ${id} RETURNING *`;
+
+    if (deletedJournal && deletedJournal.length > 0) {
+      res.status(200).json(deletedJournal[0]);
+    } else {
+      res.status(404).send("journal not found");
+    }
+  } catch (error) {
+    console.error("Error deleting journal:", error);
+    res.status(500).send("Internal server error");
   }
 });
 app.listen(PORT, () => {
