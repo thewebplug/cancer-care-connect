@@ -131,17 +131,41 @@ const Header = () => {
           <Link to={'/about'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px] lg:ml-[59px] lg:mr-[59px] font-bold">About Us</Link>
         }
         {location.pathname === "/contact" ? 
-          <Link to={'/contact'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] hover:bg-[#FFC0C0] text-white shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Contact Us</Link>
+          <Link to={'/contact'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px]  text-white hover:bg-[#FFC0C0] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Contact</Link>
           :
-          <Link to={'/contact'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px] font-bold">Contact Us</Link>
+          <Link to={'/contact'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px] font-bold">Contact</Link>
+        }
+        {location.pathname === "/forum" && auth?.token  ? 
+          <Link to={'/forum'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] lg:ml-[59px] lg:mr-[59px] text-white hover:bg-[#FFC0C0] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Forum</Link>
+          : auth?.token ?
+          <Link to={'/forum'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px] lg:ml-[59px] lg:mr-[59px] font-bold">Forum</Link> : ''
+        }
+        {location.pathname === "/journal" && auth?.token ? 
+          <Link to={'/journal'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] lg:mr-[59px] text-white hover:bg-[#FFC0C0] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Journal</Link>
+          : auth?.token ?
+          <Link to={'/journal'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px] lg:mr-[59px] font-bold">Journal</Link> : ''
+        }
+        {/* {location.pathname === "/messages" && auth?.token  ? 
+          <Link to={'/messages'} className="bg-[#efacac] text-center w-[auto] h-[49px] p-3 rounded-[10px] text-white hover:bg-[#FFC0C0] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Messages</Link>
+          : auth?.token ?
+          <Link to={'/messages'} className="text-center w-[auto] h-[49px] p-3 rounded-[10px] font-bold">Messages</Link> :
+          ''
+        } */}
+        { auth?.token &&
+          <div onClick={handleLogout}className="text-center w-[auto] h-[49px] p-3 rounded-[10px] cursor-pointer lg:ml-[59px] font-bold">Logout</div>
         }
       </div>
 
+      {!auth?.token && <div className="flex w-auto items-center justify-end">
+      <Link to={'/signin'}><button className="bg-[#fff] hover:bg-[#e7e1e1] text-black w-[auto] h-[49px] px-5 rounded-[10px] mr-[28px] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Sign In</button></Link>
+      <Link to='/signup'><button className="bg-[#5AB9EB] hover:bg-[#45a2d4] text-white w-[auto] h-[49px] px-5 rounded-[10px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Register</button></Link>
+      </div>}
+{/* 
       {auth?.token ? <div className="font-bold text-[18px]">Welcome {auth?.userInfo?.firstname} {auth?.userInfo?.lastname}</div> :<div className="flex w-auto items-center justify-end">
       <Link to={'/signin'}><button className="bg-[#fff] hover:bg-[#e7e1e1] text-black w-[auto] h-[49px] px-5 rounded-[10px] mr-[28px] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Sign In</button></Link>
       <Link to='/signup'><button className="bg-[#5AB9EB] hover:bg-[#45a2d4] text-white w-[auto] h-[49px] px-5 rounded-[10px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)] font-bold">Register</button></Link>
       </div>}
-      {auth?.token && <div onClick={handleLogout}>Log Out</div>}
+      {auth?.token && <div onClick={handleLogout}>Log Out</div>} */}
     </div>
   );
 };
