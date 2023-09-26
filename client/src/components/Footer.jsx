@@ -5,8 +5,8 @@ const Footer = () => {
   return (
     <div className="mt-[200px] mx-16 mb-16">
       <div className="w-full h-[1px] bg-[#9e9e9e] mb-[53px]"></div>
-      <div className="flex w-full justify-between items-center p-10">
-        <div className="flex items-center">
+      <div className="flex lg:flex-row flex-col w-full justify-between items-center lg:p-1">
+        <div className="flex items-center mb-10">
           <svg
             width="38"
             height="44"
@@ -106,7 +106,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="">
+        <div className="mb-10 lg:w-fit w-full">
           <div className="text-[20px] font-[700] mb-[15px]">Quick Links</div>
           <div className="mb-[5px]">
           <Link to={"/"}>
@@ -125,7 +125,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="">
+        <div className="mb-10 lg:w-fit w-full">
           {/* <div className="text-[20px] font-[700] mb-[15px]">Quick Links</div> */}
           <div className="mb-[5px]">
             <Link>
@@ -149,7 +149,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="">
+        <div className="mb-10 lg:w-fit w-full">
           {/* <div className="text-[20px] font-[700] mb-[15px]">Contact</div> */}
           <div className="mb-[5px] flex items-center">
             <svg

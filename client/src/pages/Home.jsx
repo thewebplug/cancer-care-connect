@@ -17,9 +17,9 @@ const Home = () => {
         <img className="absolute top-0 right-0 z-[-1]" src={Vector} alt="" />
         {/* <img className="absolute top-0 right-0 z-[-1]" src={Left} alt="" /> */}
 
-        <div className="flex justify-between items-center mx-16">
+        <div className="flex lg:flex-row flex-col justify-between items-center lg:mx-16 md:mx-16 mx-6">
           <div>
-            <div className="text-[58px] mb-[33px] font-[700]">
+            <div className="lg:text-[58px] md:text-[40px] text-[40px] mb-[33px] font-[700]">
               Your Personalized Cancer Support Web Application
             </div>
             <div className="text-[20px] text-justify">
@@ -28,14 +28,14 @@ const Home = () => {
               families.
             </div>
           </div>
-          <img className="w-[728px] mt-[90px]" src={Avatars} alt="" />
+          <img className="w-[728px] lg:mt-[90px] mt-[20px]" src={Avatars} alt="" />
         </div>
 
-        <div className="grid grid-cols-2 gap-[94px] justify-start mt-[155px] mb-[168px] mx-16">
+        <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-[94px] gap-[9px] justify-start mt-[155px] lg:mb-[168px] md:mb-[168px] mb-[80px] lg:mx-16 md:mx-16 mx-6">
           <img className="w-[731px]" src={Img1} alt="" />
           <div className="">
-            <div className="text-[48px] font-[400]">What we offer</div>
-            <div className="text-[20px] text-justify">
+            <div className="lg:text-[48px] md:text-[48px] text-[38px] font-[400]">What we offer</div>
+            <div className="lg:text-[20px] md:text-[20px] text-[16px] text-justify">
               Are you or a loved one battling cancer and seeking a reliable
               companion throughout your journey? Look no further – Cancer Care
               Connect is here to empower, inform, and uplift you every step of
@@ -49,9 +49,9 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-[94px] justify-start mb-[100px] mx-16">
+        <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-[94px] gap-[9px] justify-start mb-[100px] lg:mx-16 md:mx-16 mx-6">
           <div className="">
-            <div className="text-[20px] text-justify">
+            <div className="lg:text-[20px] md:text-[20px] text-[16px] text-justify">
               Cancer diagnosis not only takes a physical toll but also impacts
               emotional and psychological well-being. Patients often feel
               isolated, struggling to find people who truly understand their
