@@ -158,18 +158,19 @@ app.post("/api/v1/:user/createJournal", async (req, res) => {
   const { title, user, journal } = req.body;
 
   console.log("res", res.statusCode);
+  const timestamp = new Date();
 
-  try {
+  try { 
+    // res.send('juooooooooooo');
     const response = await sql`
-      INSERT INTO journals (title, user, journal)
-      VALUES (${title}, ${user}, ${journal})
+      INSERT INTO journals (title, userid, journal, created_at, updated_at)
+      VALUES (${title}, ${user}, ${journal}, ${timestamp}, ${timestamp})
       RETURNING *`;
 
     if (response) {
       res.status(201).send(response);
-    } else {
-      res.status(500).send("Internal server Error")
     }
+    
   } catch (error) {
     // console.error("Error inserting user:", error);
     res.status(500).send("Internal server Error");
@@ -180,11 +181,33 @@ app.get("/api/v1/:user/getJournals", async (req, res) => {
   
   try {
     const { user } = req.params
-    const journal = await sql`SELECT * FROM journals WHERE user = ${user}`;
-    if (journal) {
-      res.status(200).send(journal);
+    
+    const journals = await sql`SELECT * FROM journals WHERE userid = ${user}`;
+    if (journals?.length < 1) {
+      res.status(403).send('Sorry! Resource not found')
+    }
+    if (journals) {
+      res.status(200).send(journals);
     } else {
       res.status(40).send("No rsources found");
+    }
+  } catch (error) {
+    res.status(500).send("Internal server Error");
+  }
+});
+
+app.get("/api/v1/getJournals", async (req, res) => {
+  
+  try {
+      // Use default values of 2 for offset and limit if not provided in the query
+      const { offset = 2, limit = 5 } = req.query;
+
+    console.log(req.query);
+    const journals = await sql`SELECT * FROM journals LIMIT ${limit} OFFSET ${offset}`;
+    if (journals?.length < 1) {
+      res.status(403).send('Sorry! Resource not found')
+    }else if(journals) {
+      res.status(200).send(journals);
     }
   } catch (error) {
     res.status(500).send("Internal server Error");
@@ -194,15 +217,24 @@ app.get("/api/v1/:user/getJournals", async (req, res) => {
 app.put("/api/v1/:user/upadateJournal/:id", async (req, res) => {
   
   try {
+    const timestamp = new Date();
     const { user, id } = req.params
     const {journal} = req.body
-    const updatedJournal = await sql`UPDATE journals SET journal = ${journal} WHERE id = ${id} RETURNING *`;
+    const getJournal = await sql`SELECT * FROM journals WHERE id = ${id}`;
+    if (getJournal?.length < 1) {
+      res.status(403).send('Sorry! Resource not found')
+    }else if (getJournal?.[0]?.userid != user) {
+         res.status(401).send('You are not authorised to perform this action. The journal belongs to another user')
+    };
+    
+    const updatedJournal = await sql`UPDATE journals SET journal = ${journal}, updated_at = ${timestamp} WHERE id = ${id} RETURNING *`;
     if (updatedJournal && updatedJournal.length > 0) {
       res.status(200).send(updatedJournal);
     } else {
       res.status(40).send("No rsources found");
     }
   } catch (error) {
+    // console.error("Error inserting user:", error);
     res.status(500).send("Internal server Error");
   }
 });
