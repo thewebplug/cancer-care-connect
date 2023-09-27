@@ -55,13 +55,11 @@ const Signin = () => {
         <div className="flex lg:flex-row flex-col justify-between items-center lg:mx-16 md:mx-16 mx-6">
           <div>
             <div className="lg:text-[48px] md:text-[48px] text-[35px] mb-[33px] font-[700]">
-              Join us today <br /> and get the <br /> attention you need
+              Welcome back, <br /> Login to See more
             </div>
-            <div className="text-[20px] text-justify">
-              Are you or a loved one battling cancer and seeking <br /> a
-              reliable companion throughout your journey? <br /> Look no further
-              – Cancer Care Connect is here to <br /> empower, inform, and
-              uplift you every step of the way.
+            <div className="text-[20px] text-centeree animateUpDown">
+              <p>Scroll Down to fill form</p>
+              <svg xmlns="http://www.w3.org/2000/svg" height="10em" viewBox="0 0 384 512"><path d="M169.4 502.6c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 402.7 224 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 370.7L86.6 329.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128z"/></svg>
             </div>
           </div>
           <img className="w-[728px] mt-[90px]" src={Avatars} alt="" />
