@@ -304,26 +304,26 @@ app.post('/api/v1/createForumChat/:forumId', async (req, res) => {
   }
 });
 
-// // Update forum chat
-// app.put('/api/v1/updateForumChat/:forumId/:userId/:id', async (req, res) => {
-//   try {
-//     const { forumId, userId, id } = req.params;
-//     const { text, image } = req.body;
-//     const updateForumChat = await sql`
-//       UPDATE forumchat SET text = ${text}, image = ${image}
-//       WHERE id = ${id} AND userid = ${userId} AND forumid = ${forumId}
-//       RETURNING *`;
+// Update forum chat
+app.put('/api/v1/updateForumChat/:forumId/:userId/:id', async (req, res) => {
+  try {
+    const { forumId, userId, id } = req.params;
+    const { text, image } = req.body;
+    const updateForumChat = await sql`
+      UPDATE forumchat SET text = ${text}, image = ${image}
+      WHERE id = ${id} AND userid = ${userId} AND forumid = ${forumId}
+      RETURNING *`;
 
-//     if (updateForumChat && updateForumChat.length > 0) {
-//       res.status(200).send(updateForumChat);
-//     } else {
-//       res.status(404).send('No resources found');
-//     }
-//   } catch (error) {
-//     console.error('Error updating forum chat:', error);
-//     res.status(500).send('Internal server error');
-//   }
-// });
+    if (updateForumChat && updateForumChat.length > 0) {
+      res.status(200).send(updateForumChat);
+    } else {
+      res.status(404).send('No resources found');
+    }
+  } catch (error) {
+    console.error('Error updating forum chat:', error);
+    res.status(500).send('Internal server error');
+  }
+});
 
 // // Delete forum chat
 // app.delete('/api/v1/deleteForumChat/:forumId/:userId/:id', async (req, res) => {
