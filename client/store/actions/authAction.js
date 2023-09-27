@@ -24,6 +24,10 @@ export const userLogin = (email, password) => {
                 },
               })
             } else {
+              dispatch({
+                type: 'USER_LOGIN_FAIL',
+             
+              })
               throw new Error("Network response was not ok");
             }
       
