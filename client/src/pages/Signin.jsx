@@ -25,7 +25,7 @@ const Signin = () => {
 
   const { auth } = useSelector((state) => ({ ...state }));
 
-  const { authenticate } = auth;
+  const { authenticate, error } = auth;
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -39,7 +39,11 @@ const Signin = () => {
       navigate("/");
       toast.success("Login Sucess");
     }
-  }, [authenticate]);
+    if (error === "Incorrect Login Details") {
+      setLoading(false);
+      toast.error(error)
+    }
+  }, [authenticate, error]);
 
   return (
     <div className="text-left p-0">

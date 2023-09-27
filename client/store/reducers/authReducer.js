@@ -50,6 +50,15 @@ export const authReducer = (state = authState, action) => {
         authenticate: true,
         loading: false,
       };
+    case "USER_LOGIN_FAIL":
+      return {
+        ...state,
+        authenticate: false,
+        userInfo: "",
+        token: "",
+        error: "Incorrect Login Details",
+        message: "Logout Successful",
+      };
     case "LOGOUT_SUCCESS":
       return {
         ...state,

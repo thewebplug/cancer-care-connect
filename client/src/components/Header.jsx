@@ -48,14 +48,14 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("token");
-  //   dispatch({
-  //     type: "LOGOUT_SUCCESS",
-  //   });
-  //   localStorage.removeItem("token");
-  //   navigate("/signin");
-  // };
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch({
+      type: "LOGOUT_SUCCESS",
+    });
+    localStorage.removeItem("token");
+    navigate("/signin");
+  };
 
   console.log("auth", auth);
   console.log("shipper", location.pathname);

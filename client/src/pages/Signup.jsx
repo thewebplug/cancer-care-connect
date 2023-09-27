@@ -20,6 +20,13 @@ const Signup = () => {
   const submitRegister = async (event) => {
     event.preventDefault();
     if (password === password_confirmation) {
+      const passwordRegex =
+      /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+      toast.error("Password does not meet requirements. please include an upper case letter, a number and a symbol");
+      return;
+    }
       try {
         const response = await fetch(`${Urls?.baseUrl}${Urls?.register}`, {
           method: "POST",
