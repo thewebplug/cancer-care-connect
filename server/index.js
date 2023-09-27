@@ -218,6 +218,26 @@ app.delete("/api/v1/:user/deleteJournal/:id", async (req, res) => {
 });
 
 // OSHO
+// Get forum for user
+app.get("/api/v1/forum/:userid", async (req, res) => {
+  const { userid } = req.params;
+
+  try {
+    // Fetch data related to the specified userid
+    const response = await sql`
+      SELECT * FROM forums WHERE createdby = ${userid}`;
+
+    if (response) {
+      res.status(200).send(response);
+    } else {
+      res.status(404).send("No forums found for the specified userid");
+    }
+  } catch (error) {
+    console.error("Error fetching forums:", error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 // Create forum
 app.post("/api/v1/createForum", async (req, res) => {
   const { title, description, createdby } = req.body;
@@ -279,15 +299,35 @@ app.delete("/api/v1/deleteForum/:createdby/:id", async (req, res) => {
   }
 });
 
+// get forum chat
+app.get("/api/v1/forumChat/:forumid/:userid/:id", async (req, res) => {
+  const { userid, forumid, id } = req.params;
+
+  try {
+    // Fetch data related to the specified userid
+    const response = await sql`
+      SELECT * FROM forumchat WHERE createdby = ${userid, forumid, id}`;
+
+    if (response) {
+      res.status(200).send(response);
+    } else {
+      res.status(404).send("No forums found for the specified userid");
+    }
+  } catch (error) {
+    console.error("Error fetching forums:", error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 // Create forum chat
-app.post("/api/v1/createForumChat/:forumId", async (req, res) => {
-  const { forumId } = req.params;
+app.post("/api/v1/createForumChat/:forumid", async (req, res) => {
+  const { forumid } = req.params;
   const { text, userid, image } = req.body;
 
   try {
     const response = await sql`
       INSERT INTO forumchat (forumid, text, userid, image)
-      VALUES (${forumId}, ${text}, ${userid}, ${image})
+      VALUES (${forumid}, ${text}, ${userid}, ${image})
       RETURNING *`;
 
     if (response) {
@@ -302,13 +342,13 @@ app.post("/api/v1/createForumChat/:forumId", async (req, res) => {
 });
 
 // Update forum chat
-app.put("/api/v1/updateForumChat/:forumId/:userId/:id", async (req, res) => {
+app.put("/api/v1/updateForumChat/:forumid/:userid/:id", async (req, res) => {
   try {
-    const { forumId, userId, id } = req.params;
+    const { forumid, userid, id } = req.params;
     const { text, image } = req.body;
     const updateForumChat = await sql`
       UPDATE forumchat SET text = ${text}, image = ${image}
-      WHERE id = ${id} AND userid = ${userId} AND forumid = ${forumId}
+      WHERE id = ${id} AND userid = ${userid} AND forumid = ${forumid}
       RETURNING *`;
 
     if (updateForumChat && updateForumChat.length > 0) {
@@ -323,11 +363,11 @@ app.put("/api/v1/updateForumChat/:forumId/:userId/:id", async (req, res) => {
 });
 
 // Delete forum chat
-app.delete("/api/v1/deleteForumChat/:forumId/:userId/:id", async (req, res) => {
+app.delete("/api/v1/deleteForumChat/:forumid/:userid/:id", async (req, res) => {
   try {
-    const { forumId, userId, id } = req.params;
+    const { forumid, userid, id } = req.params;
     const deleteForumChat = await sql`
-      DELETE FROM forumchat WHERE id = ${id} AND userid = ${userId} AND forumid = ${forumId}
+      DELETE FROM forumchat WHERE id = ${id} AND userid = ${userid} AND forumid = ${forumid}
       RETURNING *`;
 
     if (deleteForumChat && deleteForumChat.length > 0) {
