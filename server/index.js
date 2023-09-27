@@ -325,24 +325,24 @@ app.put('/api/v1/updateForumChat/:forumId/:userId/:id', async (req, res) => {
   }
 });
 
-// // Delete forum chat
-// app.delete('/api/v1/deleteForumChat/:forumId/:userId/:id', async (req, res) => {
-//   try {
-//     const { forumId, userId, id } = req.params;
-//     const deleteForumChat = await sql`
-//       DELETE FROM forumchat WHERE id = ${id} AND userid = ${userId} AND forumid = ${forumId}
-//       RETURNING *`;
+// Delete forum chat
+app.delete('/api/v1/deleteForumChat/:forumId/:userId/:id', async (req, res) => {
+  try {
+    const { forumId, userId, id } = req.params;
+    const deleteForumChat = await sql`
+      DELETE FROM forumchat WHERE id = ${id} AND userid = ${userId} AND forumid = ${forumId}
+      RETURNING *`;
 
-//     if (deleteForumChat && deleteForumChat.length > 0) {
-//       res.status(200).json(deleteForumChat[0]);
-//     } else {
-//       res.status(404).send('Forum chat not found');
-//     }
-//   } catch (error) {
-//     console.error('Error deleting forum chat:', error);
-//     res.status(500).send('Internal server error');
-//   }
-// });
+    if (deleteForumChat && deleteForumChat.length > 0) {
+      res.status(200).json(deleteForumChat[0]);
+    } else {
+      res.status(404).send('Forum chat not found');
+    }
+  } catch (error) {
+    console.error('Error deleting forum chat:', error);
+    res.status(500).send('Internal server error');
+  }
+});
 
 // serve from port
 app.listen(PORT, () => {
