@@ -263,24 +263,24 @@ app.put('/api/v1/updateForum/:createdby/:id', async (req, res) => {
   }
 });
 
-// // Delete forum
-// app.delete('/api/v1/deleteForum/:createdby/:id', async (req, res) => {
-//   try {
-//     const { createdby, id } = req.params;
-//     const deleteForum = await sql`
-//       DELETE FROM forums WHERE id = ${id} AND createdby = ${createdby}
-//       RETURNING *`;
+// Delete forum
+app.delete('/api/v1/deleteForum/:createdby/:id', async (req, res) => {
+  try {
+    const { createdby, id } = req.params;
+    const deleteForum = await sql`
+      DELETE FROM forums WHERE id = ${id} AND createdby = ${createdby}
+      RETURNING *`;
 
-//     if (deleteForum && deleteForum.length > 0) {
-//       res.status(200).json(deleteForum[0]);
-//     } else {
-//       res.status(404).send('Forum not found');
-//     }
-//   } catch (error) {
-//     console.error('Error deleting forum:', error);
-//     res.status(500).send('Internal server error');
-//   }
-// });
+    if (deleteForum && deleteForum.length > 0) {
+      res.status(200).json(deleteForum[0]);
+    } else {
+      res.status(404).send('Forum not found');
+    }
+  } catch (error) {
+    console.error('Error deleting forum:', error);
+    res.status(500).send('Internal server error');
+  }
+});
 
 // // Create forum chat
 // app.post('/api/v1/createForumChat/:forumId', async (req, res) => {
