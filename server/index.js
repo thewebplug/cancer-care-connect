@@ -30,12 +30,7 @@ app.post("/api/v1/register", async (req, res) => {
   console.log("res", res.statusCode);
 
   try {
-    const passwordRegex =
-      /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/;
-    if (!passwordRegex.test(password)) {
-      res.status(400).send("Password does not meet requirements.");
-      return;
-    }
+    
 
     const emailCheck =
       await sql`SELECT COUNT(*) FROM users WHERE email = ${email}`;
