@@ -30,8 +30,6 @@ app.post("/api/v1/register", async (req, res) => {
   console.log("res", res.statusCode);
 
   try {
-    
-
     const emailCheck =
       await sql`SELECT COUNT(*) FROM users WHERE email = ${email}`;
     const emailCount = emailCheck[0].count;
@@ -164,7 +162,7 @@ app.post("/api/v1/:user/createJournal", async (req, res) => {
     if (response) {
       res.status(201).send(response);
     } else {
-      res.status(500).send("Internal server Error")
+      res.status(500).send("Internal server Error");
     }
   } catch (error) {
     // console.error("Error inserting user:", error);
@@ -173,9 +171,8 @@ app.post("/api/v1/:user/createJournal", async (req, res) => {
 });
 
 app.get("/api/v1/:user/getJournals", async (req, res) => {
-  
   try {
-    const { user } = req.params
+    const { user } = req.params;
     const journal = await sql`SELECT * FROM journals WHERE user = ${user}`;
     if (journal) {
       res.status(200).send(journal);
@@ -188,11 +185,11 @@ app.get("/api/v1/:user/getJournals", async (req, res) => {
 });
 
 app.put("/api/v1/:user/upadateJournal/:id", async (req, res) => {
-  
   try {
-    const { user, id } = req.params
-    const {journal} = req.body
-    const updatedJournal = await sql`UPDATE journals SET journal = ${journal} WHERE id = ${id} RETURNING *`;
+    const { user, id } = req.params;
+    const { journal } = req.body;
+    const updatedJournal =
+      await sql`UPDATE journals SET journal = ${journal} WHERE id = ${id} RETURNING *`;
     if (updatedJournal && updatedJournal.length > 0) {
       res.status(200).send(updatedJournal);
     } else {
@@ -222,7 +219,7 @@ app.delete("/api/v1/:user/deleteJournal/:id", async (req, res) => {
 
 // OSHO
 // Create forum
-app.post('/api/v1/createForum', async (req, res) => {
+app.post("/api/v1/createForum", async (req, res) => {
   const { title, description, createdby } = req.body;
 
   try {
@@ -234,16 +231,16 @@ app.post('/api/v1/createForum', async (req, res) => {
     if (response) {
       res.status(201).send(response);
     } else {
-      res.status(500).send('Internal server error');
+      res.status(500).send("Internal server error");
     }
   } catch (error) {
-    console.error('Error inserting forum:', error);
-    res.status(500).send('Internal server error');
+    console.error("Error inserting forum:", error);
+    res.status(500).send("Internal server error");
   }
 });
 
 // Update forum
-app.put('/api/v1/updateForum/:createdby/:id', async (req, res) => {
+app.put("/api/v1/updateForum/:createdby/:id", async (req, res) => {
   try {
     const { createdby, id } = req.params;
     const { title, description } = req.body;
@@ -255,16 +252,16 @@ app.put('/api/v1/updateForum/:createdby/:id', async (req, res) => {
     if (updateForum && updateForum.length > 0) {
       res.status(200).send(updateForum);
     } else {
-      res.status(404).send('No resources found');
+      res.status(404).send("No resources found");
     }
   } catch (error) {
-    console.error('Error updating forum:', error);
-    res.status(500).send('Internal server error');
+    console.error("Error updating forum:", error);
+    res.status(500).send("Internal server error");
   }
 });
 
 // Delete forum
-app.delete('/api/v1/deleteForum/:createdby/:id', async (req, res) => {
+app.delete("/api/v1/deleteForum/:createdby/:id", async (req, res) => {
   try {
     const { createdby, id } = req.params;
     const deleteForum = await sql`
@@ -274,16 +271,16 @@ app.delete('/api/v1/deleteForum/:createdby/:id', async (req, res) => {
     if (deleteForum && deleteForum.length > 0) {
       res.status(200).json(deleteForum[0]);
     } else {
-      res.status(404).send('Forum not found');
+      res.status(404).send("Forum not found");
     }
   } catch (error) {
-    console.error('Error deleting forum:', error);
-    res.status(500).send('Internal server error');
+    console.error("Error deleting forum:", error);
+    res.status(500).send("Internal server error");
   }
 });
 
 // Create forum chat
-app.post('/api/v1/createForumChat/:forumId', async (req, res) => {
+app.post("/api/v1/createForumChat/:forumId", async (req, res) => {
   const { forumId } = req.params;
   const { text, userid, image } = req.body;
 
@@ -296,16 +293,16 @@ app.post('/api/v1/createForumChat/:forumId', async (req, res) => {
     if (response) {
       res.status(201).send(response);
     } else {
-      res.status(500).send('Internal server error');
+      res.status(500).send("Internal server error");
     }
   } catch (error) {
-    console.error('Error inserting forum chat:', error);
-    res.status(500).send('Internal server error');
+    console.error("Error inserting forum chat:", error);
+    res.status(500).send("Internal server error");
   }
 });
 
 // Update forum chat
-app.put('/api/v1/updateForumChat/:forumId/:userId/:id', async (req, res) => {
+app.put("/api/v1/updateForumChat/:forumId/:userId/:id", async (req, res) => {
   try {
     const { forumId, userId, id } = req.params;
     const { text, image } = req.body;
@@ -317,16 +314,16 @@ app.put('/api/v1/updateForumChat/:forumId/:userId/:id', async (req, res) => {
     if (updateForumChat && updateForumChat.length > 0) {
       res.status(200).send(updateForumChat);
     } else {
-      res.status(404).send('No resources found');
+      res.status(404).send("No resources found");
     }
   } catch (error) {
-    console.error('Error updating forum chat:', error);
-    res.status(500).send('Internal server error');
+    console.error("Error updating forum chat:", error);
+    res.status(500).send("Internal server error");
   }
 });
 
 // Delete forum chat
-app.delete('/api/v1/deleteForumChat/:forumId/:userId/:id', async (req, res) => {
+app.delete("/api/v1/deleteForumChat/:forumId/:userId/:id", async (req, res) => {
   try {
     const { forumId, userId, id } = req.params;
     const deleteForumChat = await sql`
@@ -336,11 +333,11 @@ app.delete('/api/v1/deleteForumChat/:forumId/:userId/:id', async (req, res) => {
     if (deleteForumChat && deleteForumChat.length > 0) {
       res.status(200).json(deleteForumChat[0]);
     } else {
-      res.status(404).send('Forum chat not found');
+      res.status(404).send("Forum chat not found");
     }
   } catch (error) {
-    console.error('Error deleting forum chat:', error);
-    res.status(500).send('Internal server error');
+    console.error("Error deleting forum chat:", error);
+    res.status(500).send("Internal server error");
   }
 });
 
