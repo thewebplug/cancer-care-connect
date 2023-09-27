@@ -304,17 +304,17 @@ app.get("/api/v1/forumChat/:forumid/:userid/:id", async (req, res) => {
   const { userid, forumid, id } = req.params;
 
   try {
-    // Fetch data related to the specified userid
+    // Fetch data related to the specified userid, forumid, and id
     const response = await sql`
-      SELECT * FROM forumchat WHERE createdby = ${userid, forumid, id}`;
+      SELECT * FROM forumchat WHERE userid = ${userid} AND forumid = ${forumid} AND id = ${id}`;
 
-    if (response) {
+    if (response && response.length > 0) {
       res.status(200).send(response);
     } else {
-      res.status(404).send("No forums found for the specified userid");
+      res.status(404).send("No forum chat found for the specified parameters");
     }
   } catch (error) {
-    console.error("Error fetching forums:", error);
+    console.error("Error fetching forum chat:", error);
     res.status(500).send("Internal server error");
   }
 });
