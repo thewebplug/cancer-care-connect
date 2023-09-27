@@ -243,25 +243,25 @@ app.post('/api/v1/createForum', async (req, res) => {
 });
 
 // Update forum
-// app.put('/api/v1/updateForum/:createdby/:id', async (req, res) => {
-//   try {
-//     const { createdby, id } = req.params;
-//     const { title, description } = req.body;
-//     const updateForum = await sql`
-//       UPDATE forums SET description = ${description}, title = ${title}
-//       WHERE id = ${id} AND createdby = ${createdby}
-//       RETURNING *`;
+app.put('/api/v1/updateForum/:createdby/:id', async (req, res) => {
+  try {
+    const { createdby, id } = req.params;
+    const { title, description } = req.body;
+    const updateForum = await sql`
+      UPDATE forums SET description = ${description}, title = ${title}
+      WHERE id = ${id} AND createdby = ${createdby}
+      RETURNING *`;
 
-//     if (updateForum && updateForum.length > 0) {
-//       res.status(200).send(updateForum);
-//     } else {
-//       res.status(404).send('No resources found');
-//     }
-//   } catch (error) {
-//     console.error('Error updating forum:', error);
-//     res.status(500).send('Internal server error');
-//   }
-// });
+    if (updateForum && updateForum.length > 0) {
+      res.status(200).send(updateForum);
+    } else {
+      res.status(404).send('No resources found');
+    }
+  } catch (error) {
+    console.error('Error updating forum:', error);
+    res.status(500).send('Internal server error');
+  }
+});
 
 // // Delete forum
 // app.delete('/api/v1/deleteForum/:createdby/:id', async (req, res) => {
