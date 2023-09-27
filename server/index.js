@@ -300,24 +300,24 @@ app.delete("/api/v1/deleteForum/:createdby/:id", async (req, res) => {
 });
 
 // get forum chat
-// app.get("/api/v1/forumChat/:forumid/:userid/:id", async (req, res) => {
-//   const { userid, forumid, id } = req.params;
+app.get("/api/v1/forumChat/:forumid/:userid/:id", async (req, res) => {
+  const { userid, forumid, id } = req.params;
 
-//   try {
-//     // Fetch data related to the specified userid
-//     const response = await sql`
-//       SELECT * FROM forumchat WHERE createdby = ${userid, forumid, id}`;
+  try {
+    // Fetch data related to the specified userid
+    const response = await sql`
+      SELECT * FROM forumchat WHERE createdby = ${userid, forumid, id}`;
 
-//     if (response) {
-//       res.status(200).send(response);
-//     } else {
-//       res.status(404).send("No forums found for the specified userid");
-//     }
-//   } catch (error) {
-//     console.error("Error fetching forums:", error);
-//     res.status(500).send("Internal server error");
-//   }
-// });
+    if (response) {
+      res.status(200).send(response);
+    } else {
+      res.status(404).send("No forums found for the specified userid");
+    }
+  } catch (error) {
+    console.error("Error fetching forums:", error);
+    res.status(500).send("Internal server error");
+  }
+});
 
 // Create forum chat
 app.post("/api/v1/createForumChat/:forumid", async (req, res) => {
