@@ -89,6 +89,10 @@ const Signup = () => {
               – Cancer Care Connect is here to <br /> empower, inform, and
               uplift you every step of the way.
             </div>
+            <div className="text-[20px] text-centeree animateUpDown my-10">
+              <p>Scroll Down to fill form</p>
+              <svg xmlns="http://www.w3.org/2000/svg" height="10em" viewBox="0 0 384 512"><path d="M169.4 502.6c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 402.7 224 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 370.7L86.6 329.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128z"/></svg>
+            </div>
           </div>
           <img className="w-[728px] mt-[90px]" src={Avatars} alt="" />
         </div>
