@@ -36,8 +36,8 @@ const Signin = () => {
   useEffect(() => {
     if (authenticate) {
       setLoading(false);
-      navigate("/");
-      toast.success("Login Sucess");
+      navigate("/forum");
+      toast.success("Login Success");
     }
     if (error === "Incorrect Login Details") {
       setLoading(false);
