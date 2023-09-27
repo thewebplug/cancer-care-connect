@@ -11,6 +11,19 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.text-centeree {
+  text-align: -webkit-center;
+}
+
+@keyframes moveUpDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); } /* Adjust the distance to control the movement */
+}
+
+.animateUpDown {
+  animation: moveUpDown 1s infinite alternate;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
