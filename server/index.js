@@ -282,27 +282,27 @@ app.delete('/api/v1/deleteForum/:createdby/:id', async (req, res) => {
   }
 });
 
-// // Create forum chat
-// app.post('/api/v1/createForumChat/:forumId', async (req, res) => {
-//   const { forumId } = req.params;
-//   const { text, userid, image } = req.body;
+// Create forum chat
+app.post('/api/v1/createForumChat/:forumId', async (req, res) => {
+  const { forumId } = req.params;
+  const { text, userid, image } = req.body;
 
-//   try {
-//     const response = await sql`
-//       INSERT INTO forumchat (forumid, text, userid, image)
-//       VALUES (${forumId}, ${text}, ${userid}, ${image})
-//       RETURNING *`;
+  try {
+    const response = await sql`
+      INSERT INTO forumchat (forumid, text, userid, image)
+      VALUES (${forumId}, ${text}, ${userid}, ${image})
+      RETURNING *`;
 
-//     if (response) {
-//       res.status(201).send(response);
-//     } else {
-//       res.status(500).send('Internal server error');
-//     }
-//   } catch (error) {
-//     console.error('Error inserting forum chat:', error);
-//     res.status(500).send('Internal server error');
-//   }
-// });
+    if (response) {
+      res.status(201).send(response);
+    } else {
+      res.status(500).send('Internal server error');
+    }
+  } catch (error) {
+    console.error('Error inserting forum chat:', error);
+    res.status(500).send('Internal server error');
+  }
+});
 
 // // Update forum chat
 // app.put('/api/v1/updateForumChat/:forumId/:userId/:id', async (req, res) => {
