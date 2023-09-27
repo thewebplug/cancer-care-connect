@@ -149,6 +149,7 @@ app.get("/api/v1/resources", (req, res) => {
   );
 });
 
+// Journals APIs
 app.post("/api/v1/:user/createJournal", async (req, res) => {
   const { title, user, journal } = req.body;
 
@@ -203,8 +204,6 @@ app.put("/api/v1/:user/upadateJournal/:id", async (req, res) => {
 });
 
 app.delete("/api/v1/:user/deleteJournal/:id", async (req, res) => {
-  
-
   try {
     const { user, id } = req.params;
     const deletedJournal =
@@ -220,6 +219,132 @@ app.delete("/api/v1/:user/deleteJournal/:id", async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
+
+// OSHO
+// Create forum
+app.post('/api/v1/createForum', async (req, res) => {
+  const { title, description, createdby } = req.body;
+
+  try {
+    const response = await sql`
+      INSERT INTO forums (title, description, createdby)
+      VALUES (${title}, ${description}, ${createdby})
+      RETURNING *`;
+
+    if (response) {
+      res.status(201).send(response);
+    } else {
+      res.status(500).send('Internal server error');
+    }
+  } catch (error) {
+    console.error('Error inserting forum:', error);
+    res.status(500).send('Internal server error');
+  }
+});
+
+// Update forum
+// app.put('/api/v1/updateForum/:createdby/:id', async (req, res) => {
+//   try {
+//     const { createdby, id } = req.params;
+//     const { title, description } = req.body;
+//     const updateForum = await sql`
+//       UPDATE forums SET description = ${description}, title = ${title}
+//       WHERE id = ${id} AND createdby = ${createdby}
+//       RETURNING *`;
+
+//     if (updateForum && updateForum.length > 0) {
+//       res.status(200).send(updateForum);
+//     } else {
+//       res.status(404).send('No resources found');
+//     }
+//   } catch (error) {
+//     console.error('Error updating forum:', error);
+//     res.status(500).send('Internal server error');
+//   }
+// });
+
+// // Delete forum
+// app.delete('/api/v1/deleteForum/:createdby/:id', async (req, res) => {
+//   try {
+//     const { createdby, id } = req.params;
+//     const deleteForum = await sql`
+//       DELETE FROM forums WHERE id = ${id} AND createdby = ${createdby}
+//       RETURNING *`;
+
+//     if (deleteForum && deleteForum.length > 0) {
+//       res.status(200).json(deleteForum[0]);
+//     } else {
+//       res.status(404).send('Forum not found');
+//     }
+//   } catch (error) {
+//     console.error('Error deleting forum:', error);
+//     res.status(500).send('Internal server error');
+//   }
+// });
+
+// // Create forum chat
+// app.post('/api/v1/createForumChat/:forumId', async (req, res) => {
+//   const { forumId } = req.params;
+//   const { text, userid, image } = req.body;
+
+//   try {
+//     const response = await sql`
+//       INSERT INTO forumchat (forumid, text, userid, image)
+//       VALUES (${forumId}, ${text}, ${userid}, ${image})
+//       RETURNING *`;
+
+//     if (response) {
+//       res.status(201).send(response);
+//     } else {
+//       res.status(500).send('Internal server error');
+//     }
+//   } catch (error) {
+//     console.error('Error inserting forum chat:', error);
+//     res.status(500).send('Internal server error');
+//   }
+// });
+
+// // Update forum chat
+// app.put('/api/v1/updateForumChat/:forumId/:userId/:id', async (req, res) => {
+//   try {
+//     const { forumId, userId, id } = req.params;
+//     const { text, image } = req.body;
+//     const updateForumChat = await sql`
+//       UPDATE forumchat SET text = ${text}, image = ${image}
+//       WHERE id = ${id} AND userid = ${userId} AND forumid = ${forumId}
+//       RETURNING *`;
+
+//     if (updateForumChat && updateForumChat.length > 0) {
+//       res.status(200).send(updateForumChat);
+//     } else {
+//       res.status(404).send('No resources found');
+//     }
+//   } catch (error) {
+//     console.error('Error updating forum chat:', error);
+//     res.status(500).send('Internal server error');
+//   }
+// });
+
+// // Delete forum chat
+// app.delete('/api/v1/deleteForumChat/:forumId/:userId/:id', async (req, res) => {
+//   try {
+//     const { forumId, userId, id } = req.params;
+//     const deleteForumChat = await sql`
+//       DELETE FROM forumchat WHERE id = ${id} AND userid = ${userId} AND forumid = ${forumId}
+//       RETURNING *`;
+
+//     if (deleteForumChat && deleteForumChat.length > 0) {
+//       res.status(200).json(deleteForumChat[0]);
+//     } else {
+//       res.status(404).send('Forum chat not found');
+//     }
+//   } catch (error) {
+//     console.error('Error deleting forum chat:', error);
+//     res.status(500).send('Internal server error');
+//   }
+// });
+
+// serve from port
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
