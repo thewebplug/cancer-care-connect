@@ -5,4 +5,7 @@ export const Urls = {
     register: '/register',
     login: '/login',
     contact: '/contact',
+    createForum: '/createForum',
+    getForum: '/forum',
+    deleteForum: '/deleteForum'
   };
