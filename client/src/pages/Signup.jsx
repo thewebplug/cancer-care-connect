@@ -65,7 +65,7 @@ const Signup = () => {
         console.error("Error:", error.message);
       }
     } else {
-      console.error('password does not match');
+      toast.error('password does not match');
     }
   };
   return (
