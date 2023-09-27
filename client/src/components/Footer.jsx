@@ -36,9 +36,9 @@ const Footer = () => {
                 width="38"
                 height="43.0116"
                 filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
+                colorInterpolationFilters="sRGB"
               >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feFlood floodOpacity="0" result="BackgroundImageFix" />
                 <feColorMatrix
                   in="SourceAlpha"
                   type="matrix"
@@ -72,7 +72,7 @@ const Footer = () => {
                 y2="17.5058"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#FFC0C0" />
+                <stop stopColor="#FFC0C0" />
               </linearGradient>
               <linearGradient
                 id="paint1_linear_1_3641"
@@ -82,7 +82,7 @@ const Footer = () => {
                 y2="18"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#FFC0C0" />
+                <stop stopColor="#FFC0C0" />
               </linearGradient>
               <linearGradient
                 id="paint2_linear_1_3641"
@@ -92,7 +92,7 @@ const Footer = () => {
                 y2="18"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#FFC0C0" />
+                <stop stopColor="#FFC0C0" />
               </linearGradient>
             </defs>
           </svg>
@@ -160,7 +160,7 @@ const Footer = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g clip-path="url(#clip0_1_1382)">
+              <g clipPath="url(#clip0_1_1382)">
                 <path
                   d="M17.4864 12.7196L13.5489 11.0321C13.3807 10.9604 13.1937 10.9453 13.0162 10.989C12.8386 11.0328 12.6801 11.133 12.5645 11.2747L10.8207 13.4051C8.08409 12.1148 5.88171 9.91244 4.59141 7.17579L6.72187 5.43204C6.86379 5.31661 6.96424 5.15809 7.00801 4.98048C7.05178 4.80286 7.03649 4.61582 6.96445 4.44766L5.27695 0.510165C5.19789 0.328902 5.05806 0.180907 4.88157 0.0916993C4.70508 0.00249146 4.50299 -0.0223379 4.31016 0.0214927L0.653906 0.865243C0.467989 0.908175 0.302114 1.01286 0.183352 1.1622C0.0645909 1.31155 -4.28277e-05 1.49674 2.12914e-08 1.68755C2.12914e-08 10.7051 7.30898 18 16.3125 18C16.5034 18.0002 16.6886 17.9356 16.8381 17.8168C16.9875 17.698 17.0922 17.5321 17.1352 17.3461L17.9789 13.6899C18.0225 13.4961 17.9971 13.2932 17.9072 13.1161C17.8173 12.939 17.6685 12.7988 17.4864 12.7196Z"
                   fill="black"
@@ -209,7 +209,7 @@ const Footer = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g clip-path="url(#clip0_1_1384)">
+              <g clipPath="url(#clip0_1_1384)">
                 <path
                   d="M15.6277 0.1237L1.01041 6.87019C-0.676039 7.65733 -0.113891 10.1309 1.68505 10.1309H7.86939V16.3153C7.86939 18.1142 10.343 18.6767 11.1301 16.9899L17.8766 2.37265C18.4388 1.023 16.977 -0.4388 15.6277 0.1237Z"
                   fill="black"
