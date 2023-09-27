@@ -81,6 +81,7 @@ app.post("/api/v1/login", async (req, res) => {
           var token = jwt.sign(
             {
               exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7,
+              id: emailCheck[0].id,
               firstname: emailCheck[0].firstname,
               lastname: emailCheck[0].lastname,
               profilepicture: emailCheck[0].profilepicture,
