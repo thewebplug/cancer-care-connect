@@ -5,6 +5,7 @@ import Avatars from "../img/Web Developer doing coding - 640x533 1.png";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Urls } from "../routes/urls";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -15,6 +16,7 @@ const Signup = () => {
   const [gender, setGender] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
+  const navigation = useNavigate();
 
 
   const submitRegister = async (event) => {
@@ -59,7 +61,8 @@ const Signup = () => {
           setPassword("");
           setPhone("");
           setPasswordConfirmation("");
-          toast.success("Welcome to Cancer Care Connect!")
+          toast.success("Welcome to Cancer Care Connect!");
+          navigation('/signin');
         }
       } catch (error) {
         console.error("Error:", error.message);
