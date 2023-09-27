@@ -11,19 +11,7 @@ import Journal from "./pages/Journal";
 import Forum from "./pages/Forum";
 import ChatApp from "./chats/ChatApp";
 import { initializeApp } from "firebase/app";
-
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCJeKyLSzKLSi1-KJGAlGk7rwhv0jbh8W0",
-  authDomain: "tinkoko-chat-6fe9a.firebaseapp.com",
-  databaseURL: "https://tinkoko-chat-6fe9a-default-rtdb.firebaseio.com",
-  projectId: "tinkoko-chat-6fe9a",
-  storageBucket: "tinkoko-chat-6fe9a.appspot.com",
-  messagingSenderId: "890150331763",
-  appId: "1:890150331763:web:1f2484b4d05320c0f15106",
-  measurementId: "G-WN2DMWC9G9"
-};
-
+import firebaseConfig from '../firebaseConfig';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
