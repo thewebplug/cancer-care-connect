@@ -12,6 +12,8 @@ const Header = () => {
   const location = useLocation();
   const { auth } = useSelector((state) => ({ ...state }));
 
+  console.info("swears", auth.userInfo.id);
+
   const navigation = [
     {
       name: "Home",
@@ -41,6 +43,12 @@ const Header = () => {
       name: "Journal",
       href: "/journal",
       current: location.pathname === "/journal" ? true : false,
+      hide: !auth?.token ? true : false,
+    },
+    {
+      name: "My Forum",
+      href: `/myforum/${auth.userInfo.id}`,
+      current: location.pathname === `/myforum/${auth.userInfo.id}` ? true : false,
       hide: !auth?.token ? true : false,
     },
   ];
@@ -149,7 +157,7 @@ const Header = () => {
                         y2="17.5058"
                         gradientUnits="userSpaceOnUse"
                       >
-                        <stop stopColor="#FFC0C0" />
+                        <stop stopColor="rgb(59 130 246 / 0.8)" />
                       </linearGradient>
                       <linearGradient
                         id="paint1_linear_1_3641"
@@ -173,7 +181,7 @@ const Header = () => {
                       </linearGradient>
                     </defs>
                   </svg>
-                  <div className="font-bold">Cancer Care Connect</div>
+                  <div className="font-normal">Cancer Care Connect</div>
                 </div>
                 <div className="hidden md:ml-6 md:block">
                   <div className="flex space-x-4">
@@ -203,15 +211,15 @@ const Header = () => {
                     className="relative rounded-full  p-1 text-white hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                   >
                     <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
+                    <span className=" sr-only">View messages</span>
                     <svg
                       className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="w-6 h-6"
+                      stroke="#000"
+                      className="w-6 h-6 bg-blue-500 rounded-[50%] p-1 border-black"
                     >
                       <path
                         strokeLinecap="round"
@@ -237,8 +245,8 @@ const Header = () => {
                           fill="none"
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
-                          stroke="#ffffff"
-                          className="w-6 h-6"
+                          stroke="#000"
+                          className="w-6 h-6 bg-blue-500 rounded-[50%] p-1 border-black"
                         >
                           <path
                             strokeLinecap="round"

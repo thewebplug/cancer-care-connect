@@ -2,14 +2,20 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Happy from "../img/happy.png";
+import { useState } from "react";
 
-const Forum = () => {
+const MyForum = () => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [showing, setShowing] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const show = () => {
+    // setShowing(!prev);
+  }
 
   const handleSendMessage = async (e) => {
     setLoading(true);
@@ -46,28 +52,22 @@ const Forum = () => {
     }
     setLoading(false);
   };
+
+
   return (
     <>
       <Header />
       <div className="mx-16">
         <div className="w-full my-10 p-4 text-center bg-white rounded-lg hover:shadow sm:p-8">
           <h5 className="mb-2 text-3xl font-bold text-blue-900  text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600  ">
-            Express Yourself, Connect with Others
+            My Forum Topics
           </h5>
-          <p className="mb-5 text-base text-justify text-gray-500 sm:text-lg dark:text-gray-400">
-            Genuine self-expression, in our opinion, has a transforming power
-            that not only improves one's life but also helps others connect with
-            one another. We offer a caring environment for you to be yourself,
-            share your experiences, and interact with a broad community of
-            like-minded people through a variety of disciplines including art,
-            writing, conversations, and more.
-          </p>
         </div>
 
         <div className="w-full mb-10">
-          <Link className=" my-4 text-white rounded-tl-lg rounded-br-[400px] rounded-tr-[200px] border border-red-100 hover:border-red-400 p-4 bg-gradient-to-r from-blue-200 to-pink-300 hover:bg-gradient-to-r hover:from-blue-400 hover:to-pink-600">
+          <button onClick={show()} className=" my-4 text-white rounded-tl-lg rounded-br-[400px] rounded-tr-[200px] border border-red-100 hover:border-red-400 p-4 bg-gradient-to-r from-blue-200 to-pink-300 hover:bg-gradient-to-r hover:from-blue-400 hover:to-pink-600">
             + Create New Topic
-          </Link>
+          </button>
         </div>
 
         {/* Posts */}
@@ -107,4 +107,4 @@ const Forum = () => {
   );
 };
 
-export default Forum;
+export default MyForum;
