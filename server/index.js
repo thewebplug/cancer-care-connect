@@ -5,9 +5,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const app = express();
-const PORT = 3100;
+const PORT = process.env.PORT || 3100;
 
-// "http://localhost:5173", 
+"http://localhost:5173", 
 
 app.use(express.json());
 app.use(
