@@ -660,9 +660,10 @@ console.log('newUserObj', newUserObj);
           {/* <button onClick={() => onLogin()}>Click Me!!!!</button> */}
           {/* {chatLoading && <div className="loading-chat"><LoadingLargeIcon /></div>} */}
           {!!chatReducerStyle.expand && (
-            <div className="chat-app-header-container">
-              {/* <Headerv3 /> */}
-            </div>
+            <div className="header_absolute">
+            <Header />
+            <div className="header-divider"></div>
+          </div>
           )}
           {!!chatReducerStyle.expand && (
             <div className="chat-app-main-inner-user">
