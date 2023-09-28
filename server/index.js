@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3100;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://cancer-care-connect-3urv-backend.vercel.app/"],
+    origin: ["https://cancer-care-connect.vercel.app/"],
   })
 );
 
