@@ -128,7 +128,8 @@ async function createJournalTable() {
           title VARCHAR(255) NULL,
           journal VARCHAR(255) NULL,
           userId  INT,
-          created_at TIMESTAMP
+          created_at TIMESTAMP,
+          updated_at TIMESTAMP
         );
       `;
     console.log('Table "journals" created successfully.');
