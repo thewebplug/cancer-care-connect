@@ -15,6 +15,28 @@
   text-align: -webkit-center;
 }
 
+/* .input-field {
+  @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-2;
+}
+
+.btn-submit {
+  @apply bg-[#5AB9EB] w-[200px] h-[45px] mx-auto mt-[38px] rounded-[15px] text-[#fff] shadow-[2px 5px 4px 0px rgba(199, 199, 199, 0.25)];
+} */
+
+.chat-app-main-inner-user {
+  background-image: url('./assets/finalBG.png') !important;
+  width: 100% !important;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color: #fff;
+}
+
+.chat-container-expand-container {
+  background-image: url('../../assets/chatBG.png') !important;
+  width: 100% !important;
+}
+
 @keyframes moveUpDown {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); } /* Adjust the distance to control the movement */

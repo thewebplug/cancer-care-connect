@@ -43,7 +43,7 @@ export default function Chat({
     return tokens;
   };
 
-  console.log('pursue', selectedUser);
+  console.log("pursue", selectedUser);
 
   const getToToken = async (key, id) => {
     switch (key) {
@@ -541,38 +541,37 @@ export default function Chat({
                   />
                 </svg>
               )}
-              <a href={`/profile/${selectedUser?.id}`}>
-              <svg
-                width="21"
-                height="21"
-                viewBox="0 0 21 21"
-                fill="none"
-                xmlns="https://www.w3.org/2000/svg"
-                className="chat-info pointer"
-                
-              >
-                <path
-                  d="M10.5 20C15.7467 20 20 15.7467 20 10.5C20 5.25329 15.7467 1 10.5 1C5.25329 1 1 5.25329 1 10.5C1 15.7467 5.25329 20 10.5 20Z"
-                  stroke="black"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M10.5 14.3V10.5"
-                  stroke="black"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M10.5 6.7002H10.5095"
-                  stroke="black"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
+              <a>
+                <svg
+                  width="21"
+                  height="21"
+                  viewBox="0 0 21 21"
+                  fill="none"
+                  xmlns="https://www.w3.org/2000/svg"
+                  className="chat-info pointer"
+                >
+                  <path
+                    d="M10.5 20C15.7467 20 20 15.7467 20 10.5C20 5.25329 15.7467 1 10.5 1C5.25329 1 1 5.25329 1 10.5C1 15.7467 5.25329 20 10.5 20Z"
+                    stroke="black"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10.5 14.3V10.5"
+                    stroke="black"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10.5 6.7002H10.5095"
+                    stroke="black"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
               </a>
 
               {pathname?.pathname !== "/messages" && (
@@ -629,7 +628,7 @@ export default function Chat({
             </div>
           </div>
 
-          <div className="chat-main" ref={chatRef}>
+          <div className="chat-main layer" ref={chatRef}>
             {/* <GiftedChat
         messages={messages}
         onSend={newMessage => onSend(newMessage)}
@@ -820,7 +819,7 @@ export default function Chat({
               className="chat-send-button pointer"
             >
               <g filter="url(#filter0_d_1019_10340)">
-                <circle cx="30" cy="30" r="20" fill="#017019" />
+                <circle cx="30" cy="30" r="20" fill="#5AB9EB" />
               </g>
               <path
                 d="M29.7986 42.9987L41.2005 23.1998L19 28.5977L23.1995 34.1981L36.4002 26.7994L25.5991 37.3983L29.7986 42.9987Z"

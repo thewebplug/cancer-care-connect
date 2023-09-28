@@ -32,15 +32,16 @@ async function createContactTable() {
 async function createUsersTable() {
   try {
     // Drop foreign keys that reference the users table
-    // await sql`ALTER TABLE IF EXISTS forumList DROP CONSTRAINT IF EXISTS forumlist_userid_fkey;`;
-    // await sql`ALTER TABLE IF EXISTS forumChat DROP CONSTRAINT IF EXISTS forumchat_userid_fkey;`;
-    // await sql`ALTER TABLE IF EXISTS users DROP CONSTRAINT IF EXISTS users_myforum_fkey;`;
-    // await sql`ALTER TABLE IF EXISTS users DROP CONSTRAINT IF EXISTS users_forum_fkey;`;
-    // await sql`ALTER TABLE IF EXISTS journals DROP CONSTRAINT IF EXISTS users_forum_fkey;`;
+    await sql`ALTER TABLE IF EXISTS forums DROP CONSTRAINT IF EXISTS forums_createdby_fkey;`;
+    await sql`ALTER TABLE IF EXISTS forumList DROP CONSTRAINT IF EXISTS forumlist_userid_fkey;`;
+    await sql`ALTER TABLE IF EXISTS forumChat DROP CONSTRAINT IF EXISTS forumchat_userid_fkey;`;
+    await sql`ALTER TABLE IF EXISTS users DROP CONSTRAINT IF EXISTS users_myforum_fkey;`;
+    await sql`ALTER TABLE IF EXISTS users DROP CONSTRAINT IF EXISTS users_forum_fkey;`;
+    await sql`ALTER TABLE IF EXISTS journals DROP CONSTRAINT IF EXISTS users_journalId_fkey;`;
 
     // Drop the users table if it exists
-    // await sql`DROP TABLE IF EXISTS users;`;
-
+    await sql`DROP TABLE IF EXISTS users;`;
+    
     await sql`
             CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
@@ -71,9 +72,12 @@ async function createForumsTable() {
         CREATE TABLE IF NOT EXISTS forums (
           id SERIAL PRIMARY KEY,
           title VARCHAR(255),
+          image VARCHAR(255),
           description TEXT NULL,
           createdBy INT,
-          created_at TIMESTAMP
+          created_at TIMESTAMP,
+          FOREIGN KEY (createdBy) REFERENCES users(id),
+          FOREIGN KEY (myForum) REFERENCES forums(id)
         );
       `;
     console.log('Table "forums" created successfully.');
