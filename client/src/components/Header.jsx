@@ -209,6 +209,7 @@ const Header = () => {
                   <button
                     type="button"
                     className="relative rounded-full  p-1 text-white hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    onClick={() => navigate('/messages')}
                   >
                     <span className="absolute -inset-1.5" />
                     <span className=" sr-only">View messages</span>

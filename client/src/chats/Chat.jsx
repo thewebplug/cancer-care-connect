@@ -43,6 +43,8 @@ export default function Chat({
     return tokens;
   };
 
+  console.log('pursue', selectedUser);
+
   const getToToken = async (key, id) => {
     switch (key) {
       default: {
@@ -448,7 +450,7 @@ export default function Chat({
                   </div>
                 </div>
                 <div className="chat-user-username">
-                  Username: {selectedUser?.username}
+                  {/* Username: {selectedUser?.username} */}
                 </div>
               </div>
             </div>
@@ -475,7 +477,7 @@ export default function Chat({
                 //   });
                 // }}
               >
-                <svg
+                {/* <svg
                   width="44"
                   height="34"
                   viewBox="0 0 44 34"
@@ -487,8 +489,8 @@ export default function Chat({
                     d="M18.0352 29.391L31.079 10.6331L8.5 14.124L12.2081 20.0612L25.9901 13.8115L14.3271 23.4538L18.0352 29.391Z"
                     fill="black"
                   />
-                </svg>
-                <div className="chat_pay-vendor">Pay Vendor</div>
+                </svg> */}
+                {/* <div className="chat_pay-vendor">Pay Vendor</div> */}
               </a>
               {pathname?.pathname !== "/messages" && (
                 <svg
@@ -636,7 +638,7 @@ export default function Chat({
         }}
       /> */}
 
-            <div
+            {/* <div
               className="preview_container"
               onClick={() => {
                 navigate(`/product/${productDetails?.productId}`);
@@ -668,7 +670,7 @@ export default function Chat({
                  {productDetails?.totalPrice && <div>Total: <span className="product-green-bold">{productDetails?.totalPrice}</span></div>}
                 </div>
               </div>
-            </div>
+            </div> */}
             <Modal
               open={modalOpenTwo}
               onClose={() => handleModalCloseTwo()}
@@ -726,7 +728,7 @@ export default function Chat({
                 <div className="sent">
                   <div className="sent-inner">
                     <div className="loading_container">
-                      <LoadingLargeIcon />
+                      {/* <LoadingLargeIcon /> */}
                     </div>
                   </div>
                 </div>
@@ -734,7 +736,7 @@ export default function Chat({
             </div>
           </div>
           <div className="chat-input-container">
-            <label className="mr10">
+            {/* <label className="mr10">
               <svg
                 width="26"
                 height="20"
@@ -784,7 +786,7 @@ export default function Chat({
                 onChange={pickImage}
                 ref={mediaRef}
               />
-            </label>
+            </label> */}
             <form
               className="chat-input"
               onSubmit={(e) => {

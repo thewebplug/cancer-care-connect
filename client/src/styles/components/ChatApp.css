@@ -28,6 +28,14 @@
   align-items: flex-end;
 }
 
+.header_absolute {
+  position: absolute;
+  /* background-color: yellow; */
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
 .chat-modal-expanded {
   width: 100%;
   height: 100vh;

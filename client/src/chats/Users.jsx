@@ -16,6 +16,7 @@ import {
   push,
   update,
 } from 'firebase/database';
+import { Urls } from "../routes/urls";
 // import { LoadingLargeIcon } from '../../icons'
 
 
@@ -40,7 +41,7 @@ export default function Users({
   const [myData, setMyData] = useState(null);
   const [unread, setUnread] = useState([]);
   const [filtered, setFiltered] = useState(null);
-
+console.log('na here we dey');
 
   const dispatch = useDispatch();
   const pathname = useLocation();
@@ -56,33 +57,59 @@ export default function Users({
 
 
 
-  const processList = (users) => {
-    if (!users) {
-      setFiltered([]);
-      return;
-    }
-    const filtered = users?.filter((res) => res?.lastMessage);
-    const sorted = filtered.sort(
-      (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
-    );
-    setFiltered([...sorted]);
-    setUnread(filtered?.filter((res) => res.status === 0)?.length)
-  };
+  // const processList = (users) => {
+  //   if (!users) {
+  //     setFiltered([]);
+  //     return;
+  //   }
+  //   const filtered = users?.filter((res) => res?.lastMessage);
+  //   const sorted = filtered.sort(
+  //     (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+  //   );
+  //   setFiltered([...sorted]);
+  //   setUnread(filtered?.filter((res) => res.status === 0)?.length)
+  // };
 
+  // useEffect(() => {
+  //   const database = getDatabase();
+  //   const myUserRef = ref(database, `users/${userInfo?.id}/friends`);
+  //   // console.log("fetchimg", userInfo?.id);
+
+  //   const unsub = onValue(myUserRef, (snapshot) => {
+  //     const data = snapshot.val();
+  //     // console.log("fetxhed data", data);
+  //     setMyData(data);
+  //     processList(data?.filter(Boolean));
+  //   });
+
+  //   return () => unsub();
+  // }, [userInfo?.id]);
+
+  
   useEffect(() => {
-    const database = getDatabase();
-    const myUserRef = ref(database, `users/${userInfo?.id}/friends`);
-    // console.log("fetchimg", userInfo?.id);
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(
+          `${Urls?.baseUrl}${Urls?.getUsers}`
+        );
 
-    const unsub = onValue(myUserRef, (snapshot) => {
-      const data = snapshot.val();
-      // console.log("fetxhed data", data);
-      setMyData(data);
-      processList(data?.filter(Boolean));
-    });
+        if (!response.ok) {
+          alert("Network response was not ok");
+          throw new Error("Network response was not ok");
+        }
 
-    return () => unsub();
-  }, [userInfo?.id]);
+        const data = await response.json();
+        const ceive = data.filter((item) => item?.id !== auth?.userInfo?.id)
+        console.log('data omo iya mi', data);
+        console.log('data omo iya mi', auth);
+        setFiltered(ceive)
+        // setForum(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchUsers();
+  }, []);
 
   const handleChatCollapse = () => {
     if (!!chatReducerStyle.expand) return;
@@ -116,53 +143,54 @@ export default function Users({
 
 
   const onClickUser = (user) => {
+    console.log('user', user);
     setChatLoading(true)
     const database = getDatabase();
     // console.log('myData', myData)
-    const myFriends = myData || [];
-    const findFriend = myFriends.find(
-      (item) => item.chatroomId === user.chatroomId
-    );
+    const myFriends = filtered || [];
+    // const findFriend = myFriends.find(
+    //   (item) => item.chatroomId === user.chatroomId
+    // );
 
     // console.log('user', user)
     // console.log('myData?.friends', myData?.friends)
     // console.log('myFriends', myFriends)
     // console.log('findFriend', findFriend)
 
-    // console.log(
-    //   "id", findFriend?.id,
-    //   "firstName", findFriend?.firstName,
-    //   "lastName", findFriend?.lastName,
-    //   "storeName", findFriend?.storeName,
-    //   "profilePic", "",
-    //   "productName", "",
-    //   "productImage", "",
-    //   "productDetail", "",
-    //   "productWeight", "",
-    //   "productMetrics", "",
-    //   "productPrice", "",
-    //   "productSlug", "",
-    //   "productId", "",
-    //   "bidMessage", "",
-    //   "navFrom", "chatUsers"
-    // )
+    console.log(
+      "id", user?.id,
+      "firstName", user?.firstname,
+      "lastName", user?.lastname,
+      // "storeName", findFriend?.storeName,
+      // "profilePic", "",
+      // "productName", "",
+      // "productImage", "",
+      // "productDetail", "",
+      // "productWeight", "",
+      // "productMetrics", "",
+      // "productPrice", "",
+      // "productSlug", "",
+      // "productId", "",
+      // "bidMessage", "",
+      // "navFrom", "chatUsers"
+    )
     dispatch({
       type: "CURRENT_FRIEND",
       payload: {
-        id: findFriend?.id,
-        firstName: findFriend?.firstName,
-        lastName: findFriend?.lastName,
-        storeName: !!findFriend?.storeName ? findFriend?.storeName : "",
-        userName: findFriend?.username,
-        productName: "",
-        productImage: "",
-        profilePic: "",
-        productDetail: "",
-        productWeight: "",
-        productMetrics: "",
-        productPrice: "",
-        productSlug: "",
-        productId: "",
+        id: user?.id,
+        firstName: user?.firstname,
+        lastName: user?.lastname,
+        // storeName: !!findFriend?.storeName ? findFriend?.storeName : "",
+        // userName: findFriend?.username,
+        // productName: "",
+        // productImage: "",
+        // profilePic: "",
+        // productDetail: "",
+        // productWeight: "",
+        // productMetrics: "",
+        // productPrice: "",
+        // productSlug: "",
+        // productId: "",
         navFrom: "chatUsers"
 
 
@@ -173,7 +201,7 @@ export default function Users({
     // setSelectedUser(user);
 
     // console.log(user.chatroomId);
-    update(ref(database, `users/${userInfo?.id}/friends/${myFriends.indexOf(findFriend)}`), { status: 1 });
+    // update(ref(database, `users/${userInfo?.id}/friends/${myFriends.indexOf(findFriend)}`), { status: 1 });
     setTimeout(() => {setChatLoading(false)}, 1500)
   };
 
@@ -185,14 +213,14 @@ export default function Users({
         className={item?.status === 0 ? "chat-user-list-item pointer" : "chat-user-list-item-read pointer"}
       >
         
-        <img
+        {/* <img
           // src={!item?.avatar ? UserAvatar : item?.avatar}
           className="chat-user-avatar"
           alt="logged in user's avatar"
-        />
+        /> */}
         <div>
           <div className="chat-flex">
-            <div className="chat-user-list-username">{item?.storeName ? item?.storeName : item.username}</div>
+            <div className="chat-user-list-username">{item?.firstname}{' '}{item?.lastname}</div>
             {/* <svg
               width="10"
               height="10"
@@ -210,7 +238,7 @@ export default function Users({
           <div className="chat-user-last-message">
            {item?.lastMessage}
     </div>
-          {item?.status === 0 && userInfo.id === item?.id ? (
+          {/* {item?.status === 0 && userInfo.id === item?.id ? (
             <div className="chat-user-message-time">
               {moment(item.updatedAt).format("ll,        LT")}
             </div>
@@ -220,7 +248,7 @@ export default function Users({
                 {moment(item.updatedAt).format("ll,        LT")}
               </div>
             </>
-          )}
+          )} */}
         </div>
       </div>
     );
