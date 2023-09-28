@@ -39,7 +39,7 @@ async function createUsersTable() {
     // await sql`ALTER TABLE IF EXISTS journals DROP CONSTRAINT IF EXISTS users_forum_fkey;`;
 
     // Drop the users table if it exists
-    // await sql`DROP TABLE IF EXISTS journals;`;
+    // await sql`DROP TABLE IF EXISTS users;`;
 
     await sql`
             CREATE TABLE IF NOT EXISTS users (
