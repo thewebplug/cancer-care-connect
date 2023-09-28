@@ -12,13 +12,18 @@ const MyForum = () => {
   const [forum, setForum] = useState([]);
   const [description, setDescription] = useState("");
   const [showing, setShowing] = useState(false);
+  const [showingEdit, setShowingEdit] = useState(false);
   const [loading, setLoading] = useState(false);
   const { auth } = useSelector((state) => ({ ...state }));
-  const [editedTitle, setEditedTitle] = useState("");
-  const [editedDescription, setEditedDescription] = useState("");
+  const [titleEdit, setTitleEdit] = useState("");
+  const [descriptionEdit, setDescriptionEdit] = useState("");
 
   const show = () => {
     setShowing((prev) => !prev);
+  };
+
+  const showEdit = () => {
+    setShowingEdit((prev) => !prev);
   };
 
   const handleSendMessage = async (e) => {
@@ -40,11 +45,52 @@ const MyForum = () => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       } else {
-        // const data = await response.json();
+        const data = await response.json();
         // console.info('Success:', data);
+        setForum((forum) => forum.concat(data));
         setTitle("");
         setDescription("");
         toast.success("Created Successfully");
+        show();
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+    setLoading(false);
+  };
+
+  const handleSendEdit = async (e, forums) => {
+    setLoading(true);
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `${Urls?.baseUrl}${Urls?.editForum}/${forums.createdby}/${forums.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: titleEdit,
+            description: descriptionEdit,
+            createdby: auth.userInfo.id,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      } else {
+        // const data = await response.json();
+        // console.info('Success:', data);
+        setForum((prevForum) =>
+          prevForum.map((forum) =>
+            forum.id === forums.id ? { ...forum, title: titleEdit, description: descriptionEdit } : forum
+          )
+        );
+
+        toast.success("Updated Successfully");
+        showEdit();
       }
     } catch (error) {
       console.error("Error:", error.message);
@@ -94,17 +140,12 @@ const MyForum = () => {
     }
   };
 
-  const startEdit = (id, taskText) => {
+  const startEdit = (id) => {
     setEditTaskId(id);
-    setEditedTaskText(taskText);
+    showEdit();
   };
 
-  const cancelEdit = () => {
-    setEditTaskId(null);
-    setEditedTaskText("");
-  };
-
-  const editItem = async (id) => {
+  const setEditTaskId = async (id) => {
     try {
       const response = await fetch(
         `${Urls?.baseUrl}${Urls?.getForum}/${auth.userInfo.id}`,
@@ -132,9 +173,6 @@ const MyForum = () => {
               }
           )
         );
-
-        // Reset edit state
-        cancelEdit();
       } else {
         console.error("Failed to update todo");
       }
@@ -233,21 +271,89 @@ const MyForum = () => {
               </tr>
             </thead>
             <tbody>
-              {forum.map((forum, i) => (
-                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  {}
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    {forum.title}
-                  </th>
-                  <td className="px-6 py-4">{forum.description}</td>
-                  <td className="px-6 py-4">
-                    <Link onClick={() => deleteItem(forum.id)}>Delete</Link>
-                  </td>
-                </tr>
-              ))}
+              {forum.map((forum, i) =>
+                showingEdit ? (
+                  <div>
+                    <form key={i} onSubmit={(e) => handleSendEdit(e, forum)}>
+                      <div className="flex gap-4">
+                        <div className="mb-6 w-[50%]">
+                          <label
+                            for="title"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            Your Forum Title
+                          </label>
+                          <input
+                            type="text"
+                            id="title"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="This is my forum title"
+                            required
+                            value={titleEdit ? titleEdit : forum.title}
+                            onChange={(event) => {
+                              setTitleEdit(event.target.value);
+                            }}
+                          />
+                        </div>
+                        <div className="mb-6 w-[50%]">
+                          <label
+                            for="description"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            Your Forum Description
+                          </label>
+                          <textarea
+                            name="description"
+                            id="description"
+                            cols="30"
+                            rows="10"
+                            required
+                            value={
+                              descriptionEdit !== ""
+                                ? descriptionEdit
+                                : forum.description
+                            }
+                            onChange={(event) => {
+                              setDescriptionEdit(event.target.value);
+                            }}
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div className="gap-1 flex">
+                        <button
+                          type="submit"
+                          className="bg-[#5AB9EB] w-[200px] h-[45px] m-auto mt-[38px] rounded-[15px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]"
+                        >
+                          {loading ? "Loading" : "Send"}
+                        </button>
+
+                        <button
+                          onClick={() => startEdit(forum.id)}
+                          className="bg-[#000] w-[200px] h-[45px] m-auto mt-[38px] rounded-[15px] text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]"
+                        >
+                          {loading ? "Loading" : "Cancel"}
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                ) : (
+                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    {}
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      {forum.title}
+                    </th>
+                    <td className="px-6 py-4">{forum.description}</td>
+                    <td className="px-6 py-4 gap-1 grid">
+                      <Link onClick={() => startEdit(forum.id)}>Edit</Link>
+                      <Link onClick={() => deleteItem(forum.id)}>Delete</Link>
+                    </td>
+                  </tr>
+                )
+              )}
             </tbody>
           </table>
         </div>

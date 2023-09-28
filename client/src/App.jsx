@@ -13,6 +13,7 @@ import ChatApp from "./chats/ChatApp";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from '../firebaseConfig';
 import MyForum from "./pages/MyForum";
+import ForumID from "./pages/ForumID";
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -31,6 +32,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/journal" element={<Journal />} />
           <Route path="/forum" element={<Forum />} />
+          <Route path="/forum/:id" element={<ForumID /> } />
           <Route path="/myforum/:id" element={<MyForum />} />
           <Route path="/messages" element={<ChatApp /> } />
           <Route path="*" element={<Error />} />
