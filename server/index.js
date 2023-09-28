@@ -7,12 +7,12 @@ import jwt from "jsonwebtoken";
 const app = express();
 const PORT = process.env.PORT || 3100;
 
-// "http://localhost:5173", 
+"http://localhost:5173", 
 
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://cancer-care-connect.vercel.app/"],
+    origin: ["https://cancer-care-connect.vercel.app"],
   })
 );
 
