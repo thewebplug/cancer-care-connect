@@ -1,0 +1,21 @@
+.container {
+    background-color: #cacaca;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    width: 378px;
+    height: 200px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 5900;
+  }
+
+  .chat-login-input {
+    background-color: yellowgreen;
+    width: 80%;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: 10px solid pink;
+    padding: 0 20px,
+  }

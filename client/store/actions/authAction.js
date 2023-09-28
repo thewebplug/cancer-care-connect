@@ -1,7 +1,9 @@
+import { Urls } from "../../src/routes/urls";
+
 export const userLogin = (email, password) => {
     return async (dispatch) => {
         try {
-            const response = await fetch("http://localhost:3100/api/v1/login", {
+            const response = await fetch(`${Urls?.baseUrl}${Urls?.login}`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -22,6 +24,10 @@ export const userLogin = (email, password) => {
                 },
               })
             } else {
+              dispatch({
+                type: 'USER_LOGIN_FAIL',
+             
+              })
               throw new Error("Network response was not ok");
             }
       

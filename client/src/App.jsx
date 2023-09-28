@@ -9,12 +9,19 @@ import Signin from "./pages/Signin";
 import { ToastContainer } from 'react-toastify';
 import Journal from "./pages/Journal";
 import Forum from "./pages/Forum";
+import ChatApp from "./chats/ChatApp";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from '../firebaseConfig';
+import MyForum from "./pages/MyForum";
 
+// Initialize Firebase
+initializeApp(firebaseConfig);
 
 function App() {
   return (
     <>
     <ToastContainer />
+    
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -24,6 +31,8 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/journal" element={<Journal />} />
           <Route path="/forum" element={<Forum />} />
+          <Route path="/myforum/:id" element={<MyForum />} />
+          <Route path="/messages" element={<ChatApp /> } />
           <Route path="*" element={<Error />} />
         </Routes>
       </Router>

@@ -25,6 +25,7 @@ const getToken = localStorage.getItem("token");
 
 if (getToken) {
   const getInfo = tokenDecode(getToken);
+  // console.error(getInfo);
   if (getInfo) {
     authState.token = getToken;
     authState.userInfo = getInfo;
@@ -32,8 +33,6 @@ if (getToken) {
     authState.loading = false;
   }
 }
-
-
 
 export const authReducer = (state = authState, action) => {
   const { payload, type } = action;
@@ -49,6 +48,15 @@ export const authReducer = (state = authState, action) => {
         error: "",
         authenticate: true,
         loading: false,
+      };
+    case "USER_LOGIN_FAIL":
+      return {
+        ...state,
+        authenticate: false,
+        userInfo: "",
+        token: "",
+        error: "Incorrect Login Details",
+        message: "Logout Successful",
       };
     case "LOGOUT_SUCCESS":
       return {

@@ -25,7 +25,7 @@ const Signin = () => {
 
   const { auth } = useSelector((state) => ({ ...state }));
 
-  const { authenticate } = auth;
+  const { authenticate, error } = auth;
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -36,45 +36,47 @@ const Signin = () => {
   useEffect(() => {
     if (authenticate) {
       setLoading(false);
-      navigate("/");
-      toast.success("Login Sucess");
+      navigate("/forum");
+      toast.success("Login Success");
     }
-  }, [authenticate]);
+    if (error === "Incorrect Login Details") {
+      setLoading(false);
+      toast.error(error)
+    }
+  }, [authenticate, error]);
 
   return (
-    <div className="w-screen text-left p-0">
+    <div className="text-left p-0">
       <Header />
       <div className="">
         <img className="absolute top-0 right-0 z-[-1]" src={Vector} alt="" />
         {/* <img className="absolute top-0 right-0 z-[-1]" src={Left} alt="" /> */}
 
-        <div className="flex justify-between items-center mx-16">
+        <div className="flex lg:flex-row flex-col justify-between items-center lg:mx-16 md:mx-16 mx-6">
           <div>
-            <div className="text-[58px] mb-[33px] font-[700]">
-              Join us today <br /> and get the <br /> attention you need
+            <div className="lg:text-[48px] md:text-[48px] text-[35px] mb-[33px] font-[700]">
+              Welcome back, <br /> Login to See more
             </div>
-            <div className="text-[20px] text-justify">
-              Are you or a loved one battling cancer and seeking <br /> a
-              reliable companion throughout your journey? <br /> Look no further
-              – Cancer Care Connect is here to <br /> empower, inform, and
-              uplift you every step of the way.
+            <div className="text-[20px] text-centeree animateUpDown">
+              <p>Scroll Down to fill form</p>
+              <svg xmlns="http://www.w3.org/2000/svg" height="10em" viewBox="0 0 384 512"><path d="M169.4 502.6c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 402.7 224 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 370.7L86.6 329.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128z"/></svg>
             </div>
           </div>
           <img className="w-[728px] mt-[90px]" src={Avatars} alt="" />
         </div>
 
-        <div className="justify-between mx-16">
-          <div className="w-auto grid grid-cols-1 mb-20">
-            <div className="w-auto text-[72px] font-[700] mb-3">Sign In</div>
-            <div className="w-auto text-[36px] font-[700]">
+        <div className="justify-between lg:mx-16 md:mx-16 mx-6">
+          <div className="w-auto grid grid-cols-1 lg:mb-20 md:mb-20 mb-5">
+            <div className="w-auto lg:text-[72px] md:text-[72px] text-[45px] font-[700] mb-3">Sign In</div>
+            <div className="w-auto lg:text-[36px] md:text-[36px] text-[26px] font-[700]">
               Please Login To Continue
             </div>
           </div>
 
-          <div className="grid grid-cols-2">
+          <div className="grid lg:grid-cols-2 grid-cols-1">
             <form className="w-auto row justify-center" onSubmit={handleSubmit}>
               <input
-                className="bg-[#fff] border grid border-[#9e9e9e] w-[500px] h-[45px] p-5 rounded-lg mb-5"
+                className="bg-[#fff] border grid border-[#9e9e9e] lg:w-[500px] md:w-[500px] w-full h-[45px] p-5 rounded-lg mb-5"
                 type="email"
                 placeholder="Email"
                 required
@@ -85,7 +87,7 @@ const Signin = () => {
               />
 
               <input
-                className="bg-[#fff] border grid border-[#9e9e9e] w-[500px] h-[45px] p-5 rounded-lg mb-5"
+                className="bg-[#fff] border grid border-[#9e9e9e] lg:w-[500px] md:w-[500px] w-full h-[45px] p-5 rounded-lg mb-5"
                 type="password"
                 placeholder="Password"
                 required
@@ -97,16 +99,16 @@ const Signin = () => {
 
               <button
                 type="submit"
-                className="bg-[#5AB9EB] w-24 h-[45px] m-auto mt-8 rounded-lg text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]"
+                className="bg-[#5AB9EB] w-24 h-[45px] m-auto lg:mt-8 md:mt-8 mt-2 rounded-lg text-[#fff] shadow-[2px_5px_4px_0px_rgba(199,199,199,0.25)]"
               >
                 {loading ? "Loading..." : "Sign In"}
               </button>
             </form>
 
-            <div className="w-screen mt-[-210px]">
+            <div className="lg:mt-[-210px] mt-[10px]">
               <img
                 src={Employee}
-                className="justify-start w-6/12"
+                className="justify-start "
                 alt="Employee"
               />
             </div>
