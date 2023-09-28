@@ -249,6 +249,26 @@ app.delete("/api/v1/:user/deleteJournal/:id", async (req, res) => {
 });
 
 // OSHO
+// Get forum
+app.get("/api/v1/forum", async (req, res) => {
+  const { userid } = req.params;
+
+  try {
+    // Fetch data related to the specified userid
+    const response = await sql`
+      SELECT * FROM forums`;
+
+    if (response) {
+      res.status(200).send(response);
+    } else {
+      res.status(404).send("No forums found for the specified userid");
+    }
+  } catch (error) {
+    console.error("Error fetching forums:", error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 // Get forum for user
 app.get("/api/v1/forum/:userid", async (req, res) => {
   const { userid } = req.params;
@@ -292,6 +312,7 @@ app.post("/api/v1/createForum", async (req, res) => {
 
 // Update forum
 app.put("/api/v1/updateForum/:createdby/:id", async (req, res) => {
+  // console.log('updateForum', req);
   try {
     const { createdby, id } = req.params;
     const { title, description } = req.body;
@@ -331,13 +352,15 @@ app.delete("/api/v1/deleteForum/:createdby/:id", async (req, res) => {
 });
 
 // get forum chat
-app.get("/api/v1/forumChat/:forumid/:userid/:id", async (req, res) => {
-  const { userid, forumid, id } = req.params;
+app.get("/api/v1/forumChat/:id", async (req, res) => {
+  const { id } = req.params;
 
   try {
     // Fetch data related to the specified userid, forumid, and id
     const response = await sql`
-      SELECT * FROM forumchat WHERE userid = ${userid} AND forumid = ${forumid} AND id = ${id}`;
+    SELECT * FROM forum WHERE id = ${id}`;
+
+    console.warn('response', response);
 
     if (response && response.length > 0) {
       res.status(200).send(response);

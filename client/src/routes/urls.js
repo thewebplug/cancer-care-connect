@@ -7,5 +7,8 @@ export const Urls = {
     contact: '/contact',
     createForum: '/createForum',
     getForum: '/forum',
-    deleteForum: '/deleteForum'
+    editForum: '/updateForum',
+    deleteForum: '/deleteForum',
+    getUsers: '/users',
+    getOtherForum: '/forumChat',
   };

@@ -15,6 +15,7 @@ import "../styles/components/ChatApp.css";
 // import HeroBar from "../shared/HeroBar";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import Header from "../components/Header";
 // import Headerv3 from "../Headerv3";
 // import axios from "axios";
 // import { LoadingLargeIcon } from '../../icons'
@@ -68,27 +69,27 @@ export default function ChatApp() {
 
 
   const MessageId = currentFriend?.messageId;
-  const MessageUsername = currentFriend?.messageUserName;
+  // const MessageUsername = currentFriend?.messageUserName;
   const avatar = null;
   const MessageFirstName = currentFriend?.messageFirstName;
   const MessageLastName = currentFriend?.messageLastName;
-  const MessageStoreName = currentFriend?.messageStoreName;
-  const MessageProfilePic = currentFriend?.messageProfilePic;
-  const productName = currentFriend?.productName;
-  const productId = currentFriend?.productId;
-  const productImage = currentFriend?.productImage;
-  const productDetail = currentFriend?.productDetail;
-  const productWeight = currentFriend?.productWeight;
-  const productMetrics = currentFriend?.productMetrics;
-  const productPrice = currentFriend?.productPrice;
-  const productSlug = currentFriend?.productSlug;
-  const quantity = currentFriend?.quantity;
-  const amount = currentFriend?.amount;
-  const totalPrice = currentFriend?.totalPrice;
-  const lastPrice = currentFriend?.lastPrice;
-  const negotiable = currentFriend?.negotiable;
+  // const MessageStoreName = currentFriend?.messageStoreName;
+  // const MessageProfilePic = currentFriend?.messageProfilePic;
+  // const productName = currentFriend?.productName;
+  // const productId = currentFriend?.productId;
+  // const productImage = currentFriend?.productImage;
+  // const productDetail = currentFriend?.productDetail;
+  // const productWeight = currentFriend?.productWeight;
+  // const productMetrics = currentFriend?.productMetrics;
+  // const productPrice = currentFriend?.productPrice;
+  // const productSlug = currentFriend?.productSlug;
+  // const quantity = currentFriend?.quantity;
+  // const amount = currentFriend?.amount;
+  // const totalPrice = currentFriend?.totalPrice;
+  // const lastPrice = currentFriend?.lastPrice;
+  // const negotiable = currentFriend?.negotiable;
 
-  console.log('currentFriend', currentFriend);
+  console.log('currentFriend9090', currentFriend);
   
   const navFrom = currentFriend?.navFrom;
 
@@ -189,14 +190,15 @@ export default function ChatApp() {
   };
 
   const onLogin = async () => {
+    console.log('here!!!!!!!!!!!!11');
     // setChatLoading(true)
     try {
       const database = getDatabase();
       
       //first check if the user registered before
       // console.log("user", user)
-      const firstName = userInfo?.firstName;
-      const lastName = userInfo?.lastName;
+      const firstName = userInfo?.firstname;
+      const lastName = userInfo?.lastname;
       const storeName = userInfo?.storeName || null;
       const profilePic = userInfo?.profilePicUrl?.url || null;
       setCreatedAt(Date.now());
@@ -204,25 +206,27 @@ export default function ChatApp() {
       // console.log("WE GOT THE ID", MessageId)
       const user = await findUser(userInfo.id);
       const user2 = await findUser(MessageId);
-      // console.log("WE GOT THE USER2", user2)
-      // console.log("WE GOT THE USER", user)
+      console.log("WE GOT THE USER2", user2)
+      console.log("WE GOT THE USER", user)
 
 
         //create a new user if not registered
         if (!!user) {
           setMyData(user);
         } else {
+          console.log('i get aljazeera');
           const newUserObj = {
             id: userInfo?.id,
             firstName,
             lastName,
-            storeName,
-            username: userInfo?.username,
+            // storeName,
+            // username: userInfo?.username,
             avatar: profilePic,
             createdAt,
             updatedAt,
           };
-
+console.log('vino', userInfo?.id);
+console.log('newUserObj', newUserObj);
           set(ref(database, `users/${userInfo?.id}`), newUserObj);
           setMyData(newUserObj);
           
@@ -238,9 +242,9 @@ export default function ChatApp() {
               id: MessageId,
               firstName: MessageFirstName,
               lastName: MessageLastName,
-              MessageStoreName,
-              username: MessageUsername,
-              avatar: MessageProfilePic,
+              // MessageStoreName,
+              // username: MessageUsername,
+              // avatar: MessageProfilePic,
               createdAt,
               updatedAt,
             };
@@ -279,16 +283,20 @@ export default function ChatApp() {
   const onMyData = async () => {
     // setChatLoading(true)
     // console.log("rannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnNNNNNNNNNNNNNNNNNNNNNNNNNNN")
-    
+    console.log('mydataopop', myData);
+    console.log('userData', userData);
     if(await myData?.firstName){
       let newChatroomId;
       // console.log("MY DATAAAAAA PANDAAAAAAAAAAAAAAAAAAAA", myData)
       // console.log("USER DATAAAAAA PANDAAAAAAAAAAAAAAAAAAAA", userData)
       const index = myData?.friends?.findIndex((f) => f?.id === MessageId);
       const myIndex = userData?.friends?.findIndex((f) => f?.id === userInfo?.id);
+      console.log('index', index);
+      console.log('myIndex', myIndex);
+
       console.log("index", index)
       console.log("myIndex", myIndex)
-      console.log("userData?.friends[myIndex]", userData?.friends[myIndex])
+      // console.log("userData?.friends[myIndex]", userData?.friends[myIndex])
       if (myData?.friends && index > -1) {
         // console.log('FIRST');
         setIndexes((p) => {
@@ -301,26 +309,26 @@ export default function ChatApp() {
         // const findFriend = myData?.friends?.find((f) => f?.id === MessageId);
         setSelectedUser(myData?.friends[index]);
         newChatroomId = myData?.friends[index]?.chatroomId;
-        if (navFrom === "productPage") {
-          // console.log("from productPage");
-          const database = getDatabase();
-          // console.log('wetin i dey find', quantity)
-          update(ref(database, `chatRooms/${newChatroomId}`), {
-            productDetails: {
-              MessageId,
-              productId,
-              productSlug,
-              productImage,
-              productName,
-              productDetail,
-              quantity,
-              amount,
-              totalPrice,
-              lastPrice,
-              negotiable
-            },
-          });
-        }
+        // if (navFrom === "productPage") {
+        //   // console.log("from productPage");
+        //   const database = getDatabase();
+        //   // console.log('wetin i dey find', quantity)
+        //   update(ref(database, `chatRooms/${newChatroomId}`), {
+        //     productDetails: {
+        //       MessageId,
+        //       productId,
+        //       productSlug,
+        //       productImage,
+        //       productName,
+        //       productDetail,
+        //       quantity,
+        //       amount,
+        //       totalPrice,
+        //       lastPrice,
+        //       negotiable
+        //     },
+        //   });
+        // }
         return;
     }
 
@@ -333,19 +341,19 @@ export default function ChatApp() {
       messages: [],
       createdAt,
       updatedAt,
-      productDetails: {
-        MessageId,
-        productId,
-        productSlug,
-        productImage,
-        productName,
-        productDetail,
-        quantity: quantity || "",
-        amount: amount || "",
-        totalPrice: totalPrice || "",
-        lastPrice: lastPrice || "",
-        negotiable: negotiable || ""
-      },
+      // productDetails: {
+      //   MessageId,
+      //   productId,
+      //   productSlug,
+      //   productImage,
+      //   productName,
+      //   productDetail,
+      //   quantity: quantity || "",
+      //   amount: amount || "",
+      //   totalPrice: totalPrice || "",
+      //   lastPrice: lastPrice || "",
+      //   negotiable: negotiable || ""
+      // },
     });
 
      newChatroomId = newChatroomRef?.key;
@@ -353,10 +361,10 @@ export default function ChatApp() {
     const userFriends = userData?.friends || [];
 
     const userDataId = userInfo?.id;
-    const userDataUsername = userInfo?.username;
-    const userDataFirstName = userInfo?.firstName;
-    const userDataLastName = userInfo?.lastName;
-    const userDataStoreName = userInfo?.storeName || null;
+    // const userDataUsername = userInfo?.username;
+    const userDataFirstName = userInfo?.firstname;
+    const userDataLastName = userInfo?.lastname;
+    // const userDataStoreName = userInfo?.storeName || null;
     const userProfilePic = userInfo?.profilePicUrl?.url || null;
 
     //join myself to this user friend list
@@ -365,25 +373,25 @@ export default function ChatApp() {
         ...userFriends,
         {
           id: userDataId,
-          username: userDataUsername,
+          // username: userDataUsername,
           firstName: userDataFirstName,
           lastName: userDataLastName,
-          storeName: userDataStoreName,
-          avatar: userProfilePic,
+        //   storeName: userDataStoreName,
+        //   avatar: userProfilePic,
           MessageId: MessageId,
-          productId: productId,
-          productName: productName,
-          productImage: productImage,
-          productDetail: productDetail,
-          productWeight: productWeight,
-          productMetrics: productMetrics,
-          productPrice: productPrice,
-          productSlug: productSlug,
-          quantity: quantity || "",
-        amount: amount || "",
-        totalPrice: totalPrice || "",
-        lastPrice: lastPrice || "",
-        negotiable: negotiable || "",
+        //   productId: productId,
+        //   productName: productName,
+        //   productImage: productImage,
+        //   productDetail: productDetail,
+        //   productWeight: productWeight,
+        //   productMetrics: productMetrics,
+        //   productPrice: productPrice,
+        //   productSlug: productSlug,
+        //   quantity: quantity || "",
+        // amount: amount || "",
+        // totalPrice: totalPrice || "",
+        // lastPrice: lastPrice || "",
+        // negotiable: negotiable || "",
           chatroomId: newChatroomId,
           updatedAt,
           status: 0,
@@ -400,26 +408,26 @@ export default function ChatApp() {
       p.myIndex = userFriends?.length;
       p.myData = {
         id: userDataId,
-        username: userDataUsername,
+        // username: userDataUsername,
         firstName: userDataFirstName,
         lastName: userDataLastName,
-        storeName: userDataStoreName,
+        // storeName: userDataStoreName,
         avatar: null,
         // product details
         MessageId: MessageId,
-        productId: productId,
-        productName: productName,
-        productImage: productImage,
-        productDetail: productDetail,
-        productWeight: productWeight,
-        productMetrics: productMetrics,
-        productPrice: productPrice,
-        productSlug: productSlug,
-        quantity: quantity || "",
-        amount: amount || "",
-        totalPrice: totalPrice || "",
-        lastPrice: lastPrice || "",
-        negotiable: negotiable || "",
+        // productId: productId,
+        // productName: productName,
+        // productImage: productImage,
+        // productDetail: productDetail,
+        // productWeight: productWeight,
+        // productMetrics: productMetrics,
+        // productPrice: productPrice,
+        // productSlug: productSlug,
+        // quantity: quantity || "",
+        // amount: amount || "",
+        // totalPrice: totalPrice || "",
+        // lastPrice: lastPrice || "",
+        // negotiable: negotiable || "",
         // end
         chatroomId: newChatroomId,
         updatedAt,
@@ -435,26 +443,26 @@ export default function ChatApp() {
         ...myFriends,
         {
           id: MessageId,
-          username: MessageUsername,
+          // username: MessageUsername,
           firstName: MessageFirstName,
           lastName: MessageLastName,
-          storeName: MessageStoreName,
-          avatar: null,
+          // storeName: MessageStoreName,
+          // avatar: null,
           // product details
           MessageId: MessageId,
-          productId: productId,
-          productName: productName,
-          productImage: productImage,
-          productDetail: productDetail,
-          productWeight: productWeight,
-          productMetrics: productMetrics,
-          productPrice: productPrice,
-          productSlug: productSlug,
-          quantity: quantity || "",
-        amount: amount || "",
-        totalPrice: totalPrice || "",
-        lastPrice: lastPrice || "",
-        negotiable: negotiable || "",
+        //   productId: productId,
+        //   productName: productName,
+        //   productImage: productImage,
+        //   productDetail: productDetail,
+        //   productWeight: productWeight,
+        //   productMetrics: productMetrics,
+        //   productPrice: productPrice,
+        //   productSlug: productSlug,
+        //   quantity: quantity || "",
+        // amount: amount || "",
+        // totalPrice: totalPrice || "",
+        // lastPrice: lastPrice || "",
+        // negotiable: negotiable || "",
           // end
           chatroomId: newChatroomId,
           updatedAt,
@@ -466,26 +474,26 @@ export default function ChatApp() {
 
     setSelectedUser({
       id: MessageId,
-      username: MessageUsername,
+      // username: MessageUsername,
       firstName: MessageFirstName,
       lastName: MessageLastName,
-      storeName: MessageStoreName,
+      // storeName: MessageStoreName,
       avatar: null,
       // product details
       MessageId: MessageId,
-      productId: productId,
-      productName: productName,
-      productImage: productImage,
-      productDetail: productDetail,
-      productWeight: productWeight,
-      productMetrics: productMetrics,
-      productPrice: productPrice,
-      productSlug: productSlug,
-      quantity: quantity || "",
-      amount: amount || "",
-      totalPrice: totalPrice || "",
-      lastPrice: lastPrice || "",
-      negotiable: negotiable || "",
+      // productId: productId,
+      // productName: productName,
+      // productImage: productImage,
+      // productDetail: productDetail,
+      // productWeight: productWeight,
+      // productMetrics: productMetrics,
+      // productPrice: productPrice,
+      // productSlug: productSlug,
+      // quantity: quantity || "",
+      // amount: amount || "",
+      // totalPrice: totalPrice || "",
+      // lastPrice: lastPrice || "",
+      // negotiable: negotiable || "",
       // end
       chatroomId: newChatroomId,
       updatedAt,
@@ -652,9 +660,10 @@ export default function ChatApp() {
           {/* <button onClick={() => onLogin()}>Click Me!!!!</button> */}
           {/* {chatLoading && <div className="loading-chat"><LoadingLargeIcon /></div>} */}
           {!!chatReducerStyle.expand && (
-            <div className="chat-app-header-container">
-              {/* <Headerv3 /> */}
-            </div>
+            <div className="header_absolute">
+            <Header />
+            <div className="header-divider"></div>
+          </div>
           )}
           {!!chatReducerStyle.expand && (
             <div className="chat-app-main-inner-user">
@@ -670,6 +679,7 @@ export default function ChatApp() {
                 getUsersLL={getUsersLL}
                  setCurrentPage={setCurrentPage}
             setSelectedUser={setSelectedUser}
+            onLogin={onLogin}
             myData={myData}
                             setMyData={setMyData}
                             setChatLoading={setChatLoading}
@@ -687,6 +697,7 @@ export default function ChatApp() {
                setCurrentPage={setCurrentPage}
             setSelectedUser={setSelectedUser}
             myData={myData}
+            onLogin={onLogin}
                             setMyData={setMyData}
                             setChatLoading={setChatLoading}
             />
@@ -707,10 +718,10 @@ export default function ChatApp() {
           >
           {/* {chatLoading && <div className="loading-chat"><LoadingLargeIcon /></div> } */}
           {!!chatReducerStyle.expand && (
-            <>
-              {/* <Headerv3 /> */}
+            <div className="header_absolute">
+              <Header />
               <div className="header-divider"></div>
-            </>
+            </div>
           )}
 
           {!chatReducerStyle.expand && (
@@ -732,6 +743,7 @@ export default function ChatApp() {
                  setCurrentPage={setCurrentPage}
             setSelectedUser={setSelectedUser}
                             myData={myData}
+                            onLogin={onLogin}
                             setMyData={setMyData}
                             setChatLoading={setChatLoading}
 
@@ -753,6 +765,7 @@ export default function ChatApp() {
                    setCurrentPage={setCurrentPage}
             setSelectedUser={setSelectedUser}
             myData={myData}
+            onLogin={onLogin}
                             setMyData={setMyData}
                             setChatLoading={setChatLoading}
                 />
