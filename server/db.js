@@ -39,7 +39,7 @@ async function createUsersTable() {
     // await sql`ALTER TABLE IF EXISTS journals DROP CONSTRAINT IF EXISTS users_forum_fkey;`;
 
     // Drop the users table if it exists
-    // await sql`DROP TABLE IF EXISTS users;`;
+    // await sql`DROP TABLE IF EXISTS journals;`;
 
     await sql`
             CREATE TABLE IF NOT EXISTS users (
@@ -128,7 +128,8 @@ async function createJournalTable() {
           title VARCHAR(255) NULL,
           journal VARCHAR(255) NULL,
           userId  INT,
-          created_at TIMESTAMP
+          created_at TIMESTAMP,
+          updated_at TIMESTAMP
         );
       `;
     console.log('Table "journals" created successfully.');
