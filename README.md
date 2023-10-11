@@ -58,6 +58,10 @@ The app allows users to create, edit, and delete forum posts. Additionally, user
 
 Check out the live version of the application at [Cancer Care Connect](https://cancer-care-connect.vercel.app/).
 
+### Account Creation and Login
+
+To use the application, users need to create an account and log in. Please register for an account to access all the features Cancer Care Connect has to offer.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
