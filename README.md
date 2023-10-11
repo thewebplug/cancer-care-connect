@@ -58,10 +58,6 @@ The app allows users to create, edit, and delete forum posts. Additionally, user
 
 Check out the live version of the application at [Cancer Care Connect](https://cancer-care-connect.vercel.app/).
 
-## Contributing
-
-Contributions are welcome! Feel free to open issues or submit pull requests to help improve the application.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
