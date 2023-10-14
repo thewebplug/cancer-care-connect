@@ -1,5 +1,5 @@
 # Cancer Care Connect - Realtime Chat and Forum Application
-<img width="381" alt="Screen Shot 2023-08-17 at 3 31 01 PM" src="https://github.com/thewebplug/cancer-care-connect/client/src/img/Screenshot (19).png">
+<img width="381" alt="Screen Shot 2023-08-17 at 3 31 01 PM" src="https://github.com/thewebplug/cancer-care-connect/client/src/img/Screenshot (19)">
 
 Cancer Care Connect is a React application that serves as a platform for connecting cancer patients, survivors, and caregivers. The app is divided into two parts: the frontend and the backend. The frontend code is located in the `client` folder, while the backend is in the `server` folder. The backend was built with Node.js and PostgreSQL, providing a robust API for the frontend. Below are the key features of the application:
 
