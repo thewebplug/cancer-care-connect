@@ -13,8 +13,10 @@ Cancer Care Connect includes a real-time chat system powered by Firebase's Realt
 <img width="800" alt="Screen Shot 2023-08-17 at 3 31 01 PM" src="https://github.com/thewebplug/cancer-care-connect/blob/main/client/src/img/Screenshot%20(23).png">
 
 ### 2. Forum Feature
+<img width="800" alt="Screen Shot 2023-08-17 at 3 31 01 PM" src="https://github.com/thewebplug/cancer-care-connect/blob/main/client/src/img/Screenshot%20(20).png">
 
 The app allows users to create, edit, and delete forum posts. Additionally, users can comment on forums created by others, fostering a sense of community and enabling discussions on various topics related to cancer.
+<img width="800" alt="Screen Shot 2023-08-17 at 3 31 01 PM" src="https://github.com/thewebplug/cancer-care-connect/blob/main/client/src/img/Screenshot%20(21).png">
 
 ## Installation and Usage
 
