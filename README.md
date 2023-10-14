@@ -66,7 +66,7 @@ The app allows users to create, edit, and delete forum posts. Additionally, user
 
 To use the application, users need to create an account and log in. Please register for an account to access all the features Cancer Care Connect has to offer.
 
-<img width="800" alt="Screen Shot 2023-08-17 at 3 31 01 PM" src="https://github.com/thewebplug/cancer-care-connect/blob/main/client/src/img/Screenshot%20(24).png">
+<img width="800" alt="Screen Shot 2023-08-17 at 3 31 01 PM" src="https://github.com/thewebplug/cancer-care-connect/blob/main/client/src/img/Screenshot%20(25).png">
 
 
 ## Live Demo
