@@ -6,8 +6,11 @@ Cancer Care Connect is a React application that serves as a platform for connect
 ## Features
 
 ### 1. Realtime Chat System
+<img width="800" alt="Screen Shot 2023-08-17 at 3 31 01 PM" src="https://github.com/thewebplug/cancer-care-connect/blob/main/client/src/img/Screenshot%20(22).png">
 
 Cancer Care Connect includes a real-time chat system powered by Firebase's Realtime Database. Users can engage in instant conversations, providing a supportive environment for sharing experiences and advice.
+
+<img width="800" alt="Screen Shot 2023-08-17 at 3 31 01 PM" src="https://github.com/thewebplug/cancer-care-connect/blob/main/client/src/img/Screenshot%20(23).png">
 
 ### 2. Forum Feature
 
